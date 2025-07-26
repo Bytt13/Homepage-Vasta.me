@@ -6,7 +6,20 @@
         padding: 14px 0;
         top: 0;
         width: 100%;
-        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .announcement-bar__part
+    {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .announcement-bar__icon
+    {
+        height: 16px;
+        width: auto;
     }
     .announcement-bar__text
     {
@@ -14,17 +27,52 @@
         text-align: center;
         margin: 0;
         font-size: 18px;
-        font-weight: 100;
+        font-weight: 400;
         font-family: 'DM Sans', sans-serif;
     }
 </style>
 
 {% comment %} ---- HTML ---- {% endcomment %}
-
 <div class="announcement-bar-wrapper">
-    <p class="announcement-bar__text">
+    <div class="announcement-bar__part announcement-bar__part--left">
+        {% if section.settings.left_icon != blank %}
+            <img 
+              src="{{ section.settings.left_icon | image_url: height: 16 }}" 
+              class="announcement-bar__icon" 
+              alt="{{ section.settings.left_icon.alt | default: 'Ícone' | escape }}" 
+              loading="lazy"
+              height="16"
+              width="{{ 16 | times: section.settings.left_icon.aspect_ratio | round }}"
+            >
+        {% endif %}
+        {% if section.settings.left_text != blank %}
+                <p class="announcement-bar__text">
+                {{ section.settings.left_text }}
+                </p>
+        {% endif %}
+    </div>
+    <div class="announcement-bar__part announcement-bar__part--center">
+        <p class="announcement-bar__text">
         {{ section.settings.text }}
-    </p>
+        </p>
+    </div>
+        <div class="announcement-bar__part announcement-bar__part--right">
+        {% if section.settings.right_icon != blank %}
+            <img 
+              src="{{ section.settings.right_icon | image_url: height: 16 }}" 
+              class="announcement-bar__icon" 
+              alt="{{ section.settings.right_icon.alt | default: 'Ícone' | escape }}" 
+              loading="lazy"
+              height="16"
+              width="{{ 16 | times: section.settings.left_icon.aspect_ratio | round }}"
+            >
+        {% endif %}
+        {% if section.settings.right_text != blank %}
+                <p class="announcement-bar__text">
+                {{ section.settings.right_text }}
+                </p>
+        {% endif %}
+    </div>
 </div>
 
 {% comment %} ---- Schema ---- {% endcomment %}
@@ -36,8 +84,42 @@
             {
                 "type": "text",
                 "id": "text",
-                "label": "Texto do Anúncio",
+                "label": "Texto do Anúncio (Centro)",
                 "default": "WE PAY SHIPPING ON ORDERS OVER $X"
+            },
+            {
+                "type": "text",
+                "id": "left_text",
+                "label": "Texto do Anúncio (Esquerda)",
+                "default": "info@brand.com"
+            },
+            {
+                "type": "text",
+                "id": "right_text",
+                "label": "Texto do Anúncio (Direita)",
+                "default": "+1(111) 222-3333"
+            },
+            {
+                "type": "header",
+                "content": "Conteúdo da esquerda"
+            },
+            {
+                "type": "image_picker",
+                "id": "left_icon",
+                "label": "Ícone da esquerda"
+            },
+            {
+                "type": "image_picker",
+                "id": "right_icon",
+                "label": "Ícone da direita"
+            },
+            {
+                "type": "header",
+                "content": "Conteúdo da direita"
+            },
+            {
+                "type": "header",
+                "content": "Configurações de cor"
             },
             {
                 "type": "color",
