@@ -3,8 +3,16 @@
     "name": "theme_info",
     "theme_name": "Tema Em Branco",
     "theme_version": "1.0.0",
-    "theme_author": "Seu Nome",
+    "theme_author": "Lucas",
     "theme_documentation_url": "https://www.shopify.com",
     "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "theme_settings",
+    "theme_name": "Tema Alternativo",
+    "theme_version": "1.0.1",
+    "theme_author": "Outro Nome",
+    "theme_documentation_url": "https://www.shopify.com/docs",
+    "theme_support_url": "https://support.shopify.com/alt"
   }
 ]

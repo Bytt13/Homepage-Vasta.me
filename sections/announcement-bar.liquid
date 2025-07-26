@@ -1,0 +1,52 @@
+{% comment %} ---- CSS ---- {% endcomment %}
+<style>
+    .announcement-bar-wrapper
+    {
+        .background-color: {{ section.settings.background_color }};
+        padding: 12px 0;
+    }
+    .announcement-bar__text
+    {
+        color: {{ section.settings.text_color }};
+        text-align: center;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 500;
+    }
+</style>
+
+{% comment %} ---- HTML ---- {% endcomment %}
+
+<div class="announcement-bar-wrapper">
+    <p class="announcement-bar__text">
+        {{ section.settings.text }}
+    </p>
+</div>
+
+{% comment %} ---- Schema ---- {% endcomment %}
+{%  schema %} 
+    {
+        "name": "Barra de anúncios",
+        "settings": 
+        [
+            {
+                "type": "text",
+                "id": "text",
+                "label": "Texto do Anúncio",
+                "default": "WE PAY SHIPPING ON ORDERS OVER $X"
+            },
+            {
+                "type": "color",
+                "id": "background_color",
+                "label": "Cor de Fundo",
+                "default": "#17171A"
+            },
+            {
+                "type": "color",
+                "id": "text_color",
+                "label": "Cor do Texto",
+                "default": "#FFFFFF"
+            }
+        ]
+    }
+{% endschema %}
