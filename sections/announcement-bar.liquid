@@ -3,22 +3,23 @@
     .announcement-bar-wrapper
     {
         background-color: {{ section.settings.background_color }};
-        padding: 14px 0;
+        padding: 14px 50px;
         top: 0;
-        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        overflow: hidden;
+        gap: 350px;
     }
     .announcement-bar__part
     {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 5px;
     }
     .announcement-bar__icon
     {
-        height: 16px;
+        height: 12px;
         width: auto;
     }
     .announcement-bar__text
@@ -29,6 +30,7 @@
         font-size: 18px;
         font-weight: 400;
         font-family: 'DM Sans', sans-serif;
+        white-space: nowrap;
     }
 </style>
 
@@ -37,13 +39,15 @@
     <div class="announcement-bar__part announcement-bar__part--left">
         {% if section.settings.left_icon != blank %}
             <img 
-              src="{{ section.settings.left_icon | image_url: height: 16 }}" 
+              src="{{ section.settings.left_icon | image_url: height: 12 }}" 
               class="announcement-bar__icon" 
               alt="{{ section.settings.left_icon.alt | default: 'Ícone' | escape }}" 
               loading="lazy"
-              height="16"
+              height="12"
               width="{{ 16 | times: section.settings.left_icon.aspect_ratio | round }}"
             >
+        {% else %}
+             <img src="{{ 'Email Icon.svg' | asset_url }}" class="announcement-bar__icon" alt="Ícone de Email" height="12" width="16">
         {% endif %}
         {% if section.settings.left_text != blank %}
                 <p class="announcement-bar__text">
@@ -59,13 +63,15 @@
         <div class="announcement-bar__part announcement-bar__part--right">
         {% if section.settings.right_icon != blank %}
             <img 
-              src="{{ section.settings.right_icon | image_url: height: 16 }}" 
+              src="{{ section.settings.right_icon | image_url: height: 12 }}" 
               class="announcement-bar__icon" 
               alt="{{ section.settings.right_icon.alt | default: 'Ícone' | escape }}" 
               loading="lazy"
               height="16"
               width="{{ 16 | times: section.settings.left_icon.aspect_ratio | round }}"
             >
+        {% else %}
+             <img src="{{ 'Phone Icon.svg' | asset_url }}" class="announcement-bar__icon" alt="Ícone de Telefone" height="16" width="16">
         {% endif %}
         {% if section.settings.right_text != blank %}
                 <p class="announcement-bar__text">
@@ -97,7 +103,7 @@
                 "type": "text",
                 "id": "right_text",
                 "label": "Texto do Anúncio (Direita)",
-                "default": "+1(111) 222-3333"
+                "default": "+1 (111) 222-3333"
             },
             {
                 "type": "header",
@@ -106,12 +112,12 @@
             {
                 "type": "image_picker",
                 "id": "left_icon",
-                "label": "Ícone da esquerda"
+                "label": "Ícone da esquerda",
             },
             {
                 "type": "image_picker",
                 "id": "right_icon",
-                "label": "Ícone da direita"
+                "label": "Ícone da direita",
             },
             {
                 "type": "header",
