@@ -2,7 +2,7 @@
  <style>
     .header-wrapper
     {
-        padding: 20px 70px;
+        padding: 30px 70px;
         background-color: {{ section.settings.background_color }};
     }
     .header-main
@@ -32,35 +32,37 @@
         border: 1.5px solid #252525;
         border-radius: 999px;
         overflow: hidden;
+        transform: translateX(-40px);
+        border: 1.5px solid #252525;
     }
     .header__search-input
     {
         border: none;
         outline: none;
-        padding: 10px 20px;
+        padding: 8px 20px;
         width: 100%;
         font-size: 16px;
         background-color: transparent;
         font-family: 'DM Sans', sans-serif;
     }
-    .heaader__search-button
+    .header__search-button
     {
         border: none;
-        background-color: transparent;
-        padding: 10px 20px;
+        background-color: #FFFFFF;
+        padding: 8px 20px;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 8px;
         font-size: 16px;
-        border-left: 1.5px solid #252525;
-        transition: background-color 0.3ms ease, color 0.3ms ease;
+        border-left: none;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        transition: background-color 0.3ms ease, color 0.3ms
     }
     .header__search-button:hover
     {
         background-color: #00AC4F;
-        color: #ffffff;
-        cursor: pointer;
     }
     .header__cart-link
     {
@@ -100,7 +102,7 @@
     }
     .header-nav
     {
-        padding: 15px 0;
+        padding: 45px 0;
     }
     .header-nav__list
     {
@@ -155,7 +157,7 @@
                 <input
                 type="search"
                 name="q"
-                placeholder="Search Lorem Ipsum"
+                placeholder="Search: Lorem Ipsum"
                 class="header__search-input"
                 >
                 <button type="submit" class="header__search-button">
