@@ -1,0 +1,216 @@
+{% comment %} ---- CSS ---- {% endcomment %}
+<style>
+    .banner-wrapper
+    {
+        position: relative;
+        overflow: hidden;
+        padding: 0 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 500px;
+    }
+    .banner-content-wrapper
+    {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: 1440px;
+        gap: 15px;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+    .banner-text-wrapper
+    {
+        max-width: 595px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 2;
+    }
+    .reviews-text
+    {
+        padding: 0 0px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #ffffff;
+        margin: 0 0 5px 0;
+        align-items: left;
+    }
+    .banner-stars
+    {
+        color: #FFB800CC;
+        margin-left: 8px;
+        font-size: 12px;
+    }
+    .main-heading
+    {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 0.95;
+        margin: 0 0 10px 0;
+    }
+    .subheading
+    {
+        font-size: 18px;
+        line-height: 1.5;
+        margin: 0 0 30px 0;
+        opacity: 0.9;
+    }
+    .banner-button
+    {
+        padding :15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 40px;
+        transition: transform 0.3s ease;
+    }
+    .banner-button:hover
+    {
+        transform: scale(1.1);
+    }
+    .banner-image-content
+    {
+        flex-shrink: 0;
+    }
+    .banner-main-image
+    {
+        max-width: 1440px;
+        height: 506px;
+    }
+</style>
+
+{% comment %} ---- HTML ---- {% endcomment %}
+ <div class="banner-wrapper" style="background-color: {{ section.settings.background_color }};">
+  <div class="banner-content-wrapper">
+    <div class="banner-text-content">
+      {% if section.settings.reviews_text != blank %}
+        <p class="reviews-text">
+          {{ section.settings.reviews_text }}
+        <span class="banner-stars">★★★★★</span>
+        </p>
+      {% endif %}
+
+      {% if section.settings.main_heading != blank %}
+        <h1 class="main-heading" style="color: {{ section.settings.text_color }};">
+          {{ section.settings.main_heading }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <p class="subheading" style="color: {{ section.settings.text_color }};">
+          {{ section.settings.subheading }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="banner-button" style="background-color: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }};">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.main_image != blank %}
+      <div class="banner-image-content">
+        <img
+          src="{{ section.settings.main_image | image_url: width: 600 }}"
+          alt="{{ section.settings.main_image.alt | default: 'Banner image' }}"
+          class="hero-main-image"
+          loading="lazy"
+          width="600"
+          height="{{ 600 | divided_by: section.settings.main_image.aspect_ratio | round }}"
+        >
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% comment %} ---- Schema ---- {% endcomment %}
+ {% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conteúdo de Texto"
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Texto das Avaliações",
+      "default": "WITH 1600+ 5-STAR REVIEWS"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Título Principal",
+      "default": "Lorem ipsum dolor sit<br>amet consectetur"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Lorem ipsum dolor sit amet consectetur. Elit elementum rhoncus."
+    },
+    {
+      "type": "header",
+      "content": "Configurações do Botão"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto do Botão",
+      "default": "View More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do Botão"
+    },
+    {
+      "type": "header",
+      "content": "Conteúdo de Imagem"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Imagem Principal"
+    },
+    {
+      "type": "header",
+      "content": "Configurações de Cor"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do Texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Cor do Botão",
+      "default": "#00AC4F"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Cor do Texto do Botão",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

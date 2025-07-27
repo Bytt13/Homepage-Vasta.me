@@ -1,4 +1,21 @@
 {
-  "sections": {},
-  "order": []
+"sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
+    "banner": {
+      "type": "banner",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header",
+    "banner"
+  ]
 }
