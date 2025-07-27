@@ -60,16 +60,17 @@
     }
     .banner-button
     {
+        display: inline-block;
         padding :15px 40px;
         border-radius: 50px;
         text-decoration: none;
         font-size: 20px;
-        margin-top: 40px;
+        transform: translateY(20px);
         transition: transform 0.3s ease;
     }
     .banner-button:hover
     {
-        transform: scale(1.1);
+        transform: translateY(20px) scale(1.1);
     }
     .banner-image-content
     {
@@ -117,7 +118,7 @@
         <img
           src="{{ section.settings.main_image | image_url: width: 600 }}"
           alt="{{ section.settings.main_image.alt | default: 'Banner image' }}"
-          class="hero-main-image"
+          class="main-image"
           loading="lazy"
           width="600"
           height="{{ 600 | divided_by: section.settings.main_image.aspect_ratio | round }}"
