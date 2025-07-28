@@ -9,6 +9,7 @@
         align-items: center;
         justify-content: center;
         min-height: 500px;
+        background-color: {{ section.settings.background_color }}
     }
      .banner-wrapper::before {
         content: '';
@@ -20,7 +21,7 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        z-index: 1; /* Coloca a imagem acima da cor de fundo */
+        z-index: 1;
         background-image: url('{{ section.settings.background_image | image_url }}');
         opacity: {{ section.settings.background_image_opacity }};
     }
@@ -34,6 +35,7 @@
         gap: 15px;
         margin-left: 50px;
         margin-bottom: 20px;
+        z-index: 2;
     }
     .banner-text-wrapper
     {
@@ -41,7 +43,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        z-index: 2;
+        z-index: 3;
     }
     .reviews-text
     {
@@ -51,12 +53,14 @@
         color: #ffffff;
         margin: 0 0 5px 0;
         align-items: left;
+        z-index: 3;
     }
     .banner-stars
     {
         color: #FFB800CC;
         margin-left: 8px;
         font-size: 12px;
+        z-index: 3;
     }
     .main-heading
     {
@@ -64,6 +68,7 @@
         font-weight: bold;
         line-height: 0.95;
         margin: 0 0 10px 0;
+        z-index: 3;
     }
     .subheading
     {
@@ -71,6 +76,7 @@
         line-height: 1.5;
         margin: 0 0 30px 0;
         opacity: 0.9;
+        z-index: 3;
     }
     .banner-button
     {
@@ -81,6 +87,7 @@
         font-size: 20px;
         transform: translateY(20px);
         transition: transform 0.3s ease;
+        z-index: 3;
     }
     .banner-button:hover
     {
@@ -98,7 +105,7 @@
 </style>
 
 {% comment %} ---- HTML ---- {% endcomment %}
- <div class="banner-wrapper" style="background-color: {{ section.settings.background_color }};">
+ <div class="banner-wrapper">
   <div class="banner-content-wrapper">
     <div class="banner-text-content">
       {% if section.settings.reviews_text != blank %}
