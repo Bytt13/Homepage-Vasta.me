@@ -84,20 +84,20 @@
     .collection-list-nav
     {
         position: absolute;
-        left: 0;
-        width: 100%;
+        top: 181.5px;
+        left: 50%;
+        width: 95%;
         display: flex;
-        justify-content: center;
-        padding: 60px 236px;
+        justify-content: space-between;
+        transform: translate(-50%, -50%);
+        padding: 0;
         box-sizing: border-box;
         pointer-events: none;
-        gap: 1000px;
-        margin-top: 30px;
         z-index: 10;
     }
     .collection-list-nav button
     {        
-        background-color: rgba(200, 200, 200, 0.5); 
+        background-color: transparent; 
         border: none;
         border-radius: 50%;
         width: 46px;
@@ -112,12 +112,10 @@
     .collection-list-nav button:hover
     {
         transform: scale(1.15);
-        background-color: rgba(200, 200, 200, 0.9); /* Fica mais opaco no hover */
-        border-color: rgba(255, 255, 255, 0.5); /* A borda fica mais visível */
     }
      .collection-list-nav button svg path {
-        stroke: white;      /* Cor da seta: branca */
-        stroke-width: 2px;  /* Espessura da seta: 2px */
+        stroke: white;     
+        stroke-width: 2px; 
     }
 
 </style>
@@ -162,32 +160,32 @@
                     </div>
                 </a>
             {% endfor %}
-               <div class="collection-list-nav">
-                <button id="scroll_left-{{ section.id }}" aria-label="Rolar para esquerda">
-                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1258_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
-                    <rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)" fill="white" fill-opacity="0.25"/>
-                    <rect x="44.6757" y="44.6757" width="43.3514" height="43.3514" rx="21.6757" transform="rotate(-180 44.6757 44.6757)" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
-                    <path d="M28.7497 23.0005L17.2497 23.0005M17.2497 23.0005L22.9997 28.7505M17.2497 23.0005L22.9997 17.2505" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
-                    </g>
-                    <defs>
-                    <clipPath id="bgblur_0_4531_1258_clip_path" transform="translate(6.57143 6.57143)"><rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)"/>
-                    </clipPath></defs>
-                    </svg>
-                </button>
-                <button id="scroll_right-{{ section.id }}" aria-label="Rolar para esquerda">
-                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1252_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
-                    <rect width="46" height="46" rx="23" fill="white" fill-opacity="0.25"/>
-                    <rect x="1.32431" y="1.32431" width="43.3514" height="43.3514" rx="21.6757" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
-                    <path d="M17.2503 22.9995H28.7503M28.7503 22.9995L23.0003 17.2495M28.7503 22.9995L23.0003 28.7495" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
-                    </g>
-                    <defs>
-                    <clipPath id="bgblur_0_4531_1252_clip_path" transform="translate(6.57143 6.57143)"><rect width="46" height="46" rx="23"/>
-                    </clipPath></defs>
-                    </svg>
-                </button>
-            </div>
+        </div>
+        <div class="collection-list-nav">
+            <button id="scroll-left-{{ section.id }}" aria-label="Rolar para esquerda">
+                <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1258_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
+                <rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)" fill="white" fill-opacity="0.25"/>
+                <rect x="44.6757" y="44.6757" width="43.3514" height="43.3514" rx="21.6757" transform="rotate(-180 44.6757 44.6757)" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
+                <path d="M28.7497 23.0005L17.2497 23.0005M17.2497 23.0005L22.9997 28.7505M17.2497 23.0005L22.9997 17.2505" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="bgblur_0_4531_1258_clip_path" transform="translate(6.57143 6.57143)"><rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)"/>
+                </clipPath></defs>
+                </svg>
+            </button>
+            <button id="scroll-right-{{ section.id }}" aria-label="Rolar para esquerda">
+                <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1252_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
+                <rect width="46" height="46" rx="23" fill="white" fill-opacity="0.25"/>
+                <rect x="1.32431" y="1.32431" width="43.3514" height="43.3514" rx="21.6757" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
+                <path d="M17.2503 22.9995H28.7503M28.7503 22.9995L23.0003 17.2495M28.7503 22.9995L23.0003 28.7495" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="bgblur_0_4531_1252_clip_path" transform="translate(6.57143 6.57143)"><rect width="46" height="46" rx="23"/>
+                </clipPath></defs>
+                </svg>
+            </button>
         </div>
     </div>
 </div>
