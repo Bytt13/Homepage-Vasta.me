@@ -1,48 +1,29 @@
 {% comment %} ---- CSS ---- {% endcomment %}
- <style>
-    .collection-list-wrapper
-    {
-        padding: 50px 0px;
-        background_color: {{ section.settings.background_color }};
+<style>
+    .collection-list-wrapper {
+        padding: 50px 0;
+        background-color: {{ section.settings.background_color }};
     }
-    .collection-list-header
-    {
+
+    .collection-list-header {
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 40px;
     }
-    .collection-list-title
-    {
+
+    .collection-list-title {
         font-size: 36px;
         font-weight: bold;
         color: {{ section.settings.title_color }};
     }
-    .collection-list-content
-    {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        overflow-x: auto;
-        padding-bottom: 20px;
-    }
-    .collection-list-content::-webkit-scrollbar {
-        display: none;
-    }
-    .collection-list-content {
-        -ms-overflow-style: none; 
-        scrollbar-width: none; 
-    }
-    .collection-list-content-wrapper
-    {
-        max-width: 1170px;
+
+    .collection-list-swiper {
+        max-width: 1300px; 
         margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
+        position: relative; 
     }
-    .collection-card
-    {
+
+    .collection-card {
         position: relative;
-        flex: 0 0 243px;
         width: 243px;
         height: 363px;
         border-radius: 13px;
@@ -50,223 +31,175 @@
         color: white;
         text-decoration: none;
         display: block;
-        transition: transform 0.3s ease;
-        scroll-snap-align: start;
     }
-    .collection-card-image
-    {
+
+    .collection-card-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.3s ease;
     }
-    .collection--card:hover .collection-card-image
-    {
+
+    .collection-card:hover .collection-card-image {
         transform: scale(1.05);
     }
-    .collection-card-overlay
-    {
+
+    .collection-card-overlay {
         position: absolute;
         top: 0;
         left: 0;
-        bottom: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0)100%);
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
         display: flex;
         align-items: flex-end;
         padding: 20px;
     }
-    .collection-card-title
-    {
+
+    .collection-card-title {
         font-size: 24px;
         font-weight: 500;
     }
-    .collection-list-nav
-    {
-        position: absolute;
-        top: 181.5px;
-        left: 50%;
-        width: 95%;
-        display: flex;
-        justify-content: space-between;
-        transform: translate(-50%, -50%);
-        padding: 0;
-        box-sizing: border-box;
-        pointer-events: none;
-        z-index: 10;
-    }
-    .collection-list-nav button
-    {        
-        background-color: transparent; 
+
+    .collection-list-swiper .swiper-button-prev,
+    .collection-list-swiper .swiper-button-next {
+        background: rgba(200,200,200,0.25);
+        backdrop-filter: blur(10px);
         border: none;
         border-radius: 50%;
-        width: 46px;
-        height: 46px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: transform 0.3s ease;
-        pointer-events: auto;
-    }
-    .collection-list-nav button:hover
-    {
-        transform: scale(1.15);
-    }
-     .collection-list-nav button svg path {
-        stroke: white;     
-        stroke-width: 2px; 
+        width: 46px;ß
+        height: 46px; 
+        transition: transform 0.2s ease;
     }
 
+    .collection-list-swiper .swiper-button-prev:hover,
+    .collection-list-swiper .swiper-button-next:hover {
+        transform: scale(1.1);
+    }
+    
+    .collection-list-swiper .swiper-button-prev::after,
+    .collection-list-swiper .swiper-button-next::after {
+        display: none;
+    }
+    
 </style>
 
 {% comment %} ---- HTML ---- {% endcomment %}
- <div class="collection-list-wrapper" data-section-id="{{ section.id }}">
+<div class="collection-list-wrapper">
     <div class="collection-list-header">
         {% if section.settings.title != blank %}
             <h2 class="collection-list-title">{{ section.settings.title | escape }}</h2>
-        {%  endif %}
+        {% endif %}
     </div>
-    <div class="collection-list-content-wrapper">
-        <div class="collection-list-content" id="collection-list-{{ section.id }}">
+
+    <div class="swiper collection-list-swiper">
+        <div class="swiper-wrapper">
             {% for block in section.blocks %}
-                <a href="{{ block.settings.collection.url | default: '#' }}" class="collection-card">
-                    {% if block.settings.image != blank%}
-                        <img src="{{ block.settings.image | image_url: width: 440}}"
-                        alt="{{ block.settings.image.alt| default: block.settings.collection.title }}"
-                        class="collection-card-image"
-                        loading="lazy"
-                        width="243"
-                        height="363">
-                    {% else %}
-                        {% if block.settings.collection.image != blank %}
-                            <img src="{{ block.settings.collection.image | image_url: width: 440 }}"
-                            alt="{{ block.settings.collection.title }}"
-                            class="collection-card-image"
-                            loading="lazy"
-                            width="243"
-                            height="363">
+                <div class="swiper-slide">
+                    <a href="{{ block.settings.collection.url | default: '#' }}" class="collection-card">
+                        {% if block.settings.image != blank %}
+                            <img src="{{ block.settings.image | image_url: width: 486 }}" alt="{{ block.settings.image.alt | default: block.settings.collection.title }}" class="collection-card-image" loading="lazy" width="243" height="363">
+                        {% elsif block.settings.collection.image != blank %}
+                            <img src="{{ block.settings.collection.image | image_url: width: 486 }}" alt="{{ block.settings.collection.title }}" class="collection-card-image" loading="lazy" width="243" height="363">
                         {% else %}
-                            <img src="{{ 'c7f13605799103bd8e28d91a9bb9f04b06563998.png' | asset_url }}"
-                            alt="Imagem padrão da coleção"
-                            class="collection-card-image"
-                            loading="lazy"
-                            width="243"
-                            height="363">
+                            <img src="{{ 'c7f13605799103bd8e28d91a9bb9f04b06563998.png' | asset_url }}" alt="Imagem padrão da coleção" class="collection-card-image" loading="lazy" width="243" height="363">
                         {% endif %}
-                    {% endif %}
-                    <div class="collection-card-overlay">
-                        <h3 class="collection-card-title">{{ block.settings.collection.title| default: "Lorem Ipsum" }}</h3>
-                    </div>
-                </a>
+                        <div class="collection-card-overlay">
+                            <h3 class="collection-card-title">{{ block.settings.collection.title | default: "Lorem Ipsum" }}</h3>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
-        <div class="collection-list-nav">
-            <button id="scroll-left-{{ section.id }}" aria-label="Rolar para esquerda">
-                <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1258_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
-                <rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)" fill="white" fill-opacity="0.25"/>
-                <rect x="44.6757" y="44.6757" width="43.3514" height="43.3514" rx="21.6757" transform="rotate(-180 44.6757 44.6757)" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
-                <path d="M28.7497 23.0005L17.2497 23.0005M17.2497 23.0005L22.9997 28.7505M17.2497 23.0005L22.9997 17.2505" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-                <defs>
-                <clipPath id="bgblur_0_4531_1258_clip_path" transform="translate(6.57143 6.57143)"><rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)"/>
-                </clipPath></defs>
-                </svg>
-            </button>
-            <button id="scroll-right-{{ section.id }}" aria-label="Rolar para esquerda">
-                <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1252_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
-                <rect width="46" height="46" rx="23" fill="white" fill-opacity="0.25"/>
-                <rect x="1.32431" y="1.32431" width="43.3514" height="43.3514" rx="21.6757" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
-                <path d="M17.2503 22.9995H28.7503M28.7503 22.9995L23.0003 17.2495M28.7503 22.9995L23.0003 28.7495" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-                <defs>
-                <clipPath id="bgblur_0_4531_1252_clip_path" transform="translate(6.57143 6.57143)"><rect width="46" height="46" rx="23"/>
-                </clipPath></defs>
-                </svg>
-            </button>
+
+        <div class="swiper-button-prev">
+            <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g><rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)" fill="white" fill-opacity="0.25"/><rect x="44.6757" y="44.6757" width="43.3514" height="43.3514" rx="21.6757" transform="rotate(-180 44.6757 44.6757)" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/><path d="M28.7497 23.0005L17.2497 23.0005M17.2497 23.0005L22.9997 28.7505M17.2497 23.0005L22.9997 17.2505" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/></g>
+            </svg>
+        </div>
+        <div class="swiper-button-next">
+            <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g><rect width="46" height="46" rx="23" fill="white" fill-opacity="0.25"/><rect x="1.32431" y="1.32431" width="43.3514" height="43.3514" rx="21.6757" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/><path d="M17.2503 22.9995H28.7503M28.7503 22.9995L23.0003 17.2495M28.7503 22.9995L23.0003 28.7495" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/></g>
+            </svg>
         </div>
     </div>
 </div>
 
 {% comment %} ---- JAVASCRIPT ---- {% endcomment %}
- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const scrollContainer = document.getElementById('collection-list-{{ section.id }}');
-        const scrollLeftBtn = document.getElementById('scroll-left-{{ section.id }}');
-        const scrollRightBtn = document.getElementById('scroll-right-{{ section.id }}');
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa o Swiper
+    const swiper = new Swiper('.collection-list-swiper', {
+      // Opções do Swiper
+      loop: true,
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 30,
 
-        if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) {
-            return;
+      // Navegação por setas
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 15,
+          centeredSlides: true,
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+          centeredSlides: false,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 15,
+          centeredSlides: false,
+        },
+        1280: {
+          slidesPerView: 5,
+          spaceBetween: 22,
+          centeredSlides: false,
         }
-
-        const scrollAmount = 240;
-
-        scrollLeftBtn.addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-
-        scrollRightBtn.addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
+      }
     });
+  });
 </script>
 
 {% comment %} ---- SCHEMA ---- {% endcomment %}
- {% schema %}
+{% schema %}
     {
-  "name": "Lista de Coleções",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título da Seção",
-      "default": "Shop by Collection"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Cor de Fundo",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Cor do Título",
-      "default": "#000000"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "collection",
-      "name": "Coleção",
+      "name": "Lista de Coleções",
       "settings": [
+        { "type": "text", "id": "title", "label": "Título da Seção", "default": "Shop by Collection" },
+        { "type": "color", "id": "background_color", "label": "Cor de Fundo", "default": "#FFFFFF" },
+        { "type": "color", "id": "title_color", "label": "Cor do Título", "default": "#000000" }
+      ],
+      "blocks": [
         {
           "type": "collection",
-          "id": "collection",
-          "label": "Selecione a Coleção"
-        },
+          "name": "Coleção",
+          "settings": [
+            { "type": "collection", "id": "collection", "label": "Selecione a Coleção" },
+            { "type": "image_picker", "id": "image", "label": "Imagem Personalizada (Opcional)", "info": "Substitui a imagem padrão da coleção. Use uma imagem com proporção aproximada de 243x363." }
+          ]
+        }
+      ],
+      "presets": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Imagem Personalizada (Opcional)",
-          "info": "Substitui a imagem padrão da coleção. Use uma imagem com proporção aproximada de 220x350."
+          "name": "Lista de Coleções (com Swiper)",
+          "blocks": [
+            { "type": "collection" },
+            { "type": "collection" },
+            { "type": "collection" },
+            { "type": "collection" },
+            { "type": "collection" },
+            { "type": "collection" }
+          ]
         }
       ]
     }
-  ],
-  "presets": [
-    {
-      "name": "Lista de Coleções",
-      "blocks": [
-        { "type": "collection" },
-        { "type": "collection" },
-        { "type": "collection" },
-        { "type": "collection" },
-        { "type": "collection" }
-      ]
-    }
-  ]
-}
- {% endschema %}
+{% endschema %}
