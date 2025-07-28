@@ -10,6 +10,16 @@
         justify-content: center;
         min-height: 500px;
         background-color: {{ section.settings.background_color }}
+        {%- if section.settings.background_image != blank -%}
+            background-image: url('{{ section.settings.background_image | image_url: width: 1440 }}');
+        {%- else -%}
+            background-image: url("{{ 'BG.png' | asset_url }}");
+        {%- endif -%}
+
+        /* Melhora a exibição da imagem de fundo */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
      .banner-wrapper::before {
         content: '';
@@ -35,7 +45,6 @@
         gap: 15px;
         margin-left: 50px;
         margin-bottom: 20px;
-        z-index: 2;
     }
     .banner-text-wrapper
     {
