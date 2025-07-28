@@ -1,0 +1,274 @@
+{% comment %} ---- CSS ---- {% endcomment %}
+ <style>
+    .collection-list-wrapper
+    {
+        padding: 50px 0px;
+        background_color: {{ section.settings.background_color }};
+    }
+    .collection-list-header
+    {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .collection-list-title
+    {
+        font-size: 36px;
+        font-weight: bold;
+        color: {{ section.settings.title_color }};
+    }
+    .collection-list-content
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+    .collection-list-content::-webkit-scrollbar {
+        display: none;
+    }
+    .collection-list-content {
+        -ms-overflow-style: none; 
+        scrollbar-width: none; 
+    }
+    .collection-list-content-wrapper
+    {
+        max-width: 1170px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+    }
+    .collection-card
+    {
+        position: relative;
+        flex: 0 0 243px;
+        width: 243px;
+        height: 363px;
+        border-radius: 13px;
+        overflow: hidden;
+        color: white;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.3s ease;
+        scroll-snap-align: start;
+    }
+    .collection-card-image
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .collection--card:hover .collection-card-image
+    {
+        transform: scale(1.05);
+    }
+    .collection-card-overlay
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0)100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+    }
+    .collection-card-title
+    {
+        font-size: 24px;
+        font-weight: 500;
+    }
+    .collection-list-nav
+    {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 60px 236px;
+        box-sizing: border-box;
+        pointer-events: none;
+        gap: 1000px;
+        margin-top: 30px;
+        z-index: 10;
+    }
+    .collection-list-nav button
+    {        
+        background-color: rgba(200, 200, 200, 0.5); 
+        border: none;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+        pointer-events: auto;
+    }
+    .collection-list-nav button:hover
+    {
+        transform: scale(1.15);
+        background-color: rgba(200, 200, 200, 0.9); /* Fica mais opaco no hover */
+        border-color: rgba(255, 255, 255, 0.5); /* A borda fica mais visível */
+    }
+     .collection-list-nav button svg path {
+        stroke: white;      /* Cor da seta: branca */
+        stroke-width: 2px;  /* Espessura da seta: 2px */
+    }
+
+</style>
+
+{% comment %} ---- HTML ---- {% endcomment %}
+ <div class="collection-list-wrapper" data-section-id="{{ section.id }}">
+    <div class="collection-list-header">
+        {% if section.settings.title != blank %}
+            <h2 class="collection-list-title">{{ section.settings.title | escape }}</h2>
+        {%  endif %}
+    </div>
+    <div class="collection-list-content-wrapper">
+        <div class="collection-list-content" id="collection-list-{{ section.id }}">
+            {% for block in section.blocks %}
+                <a href="{{ block.settings.collection.url | default: '#' }}" class="collection-card">
+                    {% if block.settings.image != blank%}
+                        <img src="{{ block.settings.image | image_url: width: 440}}"
+                        alt="{{ block.settings.image.alt| default: block.settings.collection.title }}"
+                        class="collection-card-image"
+                        loading="lazy"
+                        width="243"
+                        height="363">
+                    {% else %}
+                        {% if block.settings.collection.image != blank %}
+                            <img src="{{ block.settings.collection.image | image_url: width: 440 }}"
+                            alt="{{ block.settings.collection.title }}"
+                            class="collection-card-image"
+                            loading="lazy"
+                            width="243"
+                            height="363">
+                        {% else %}
+                            <img src="{{ 'c7f13605799103bd8e28d91a9bb9f04b06563998.png' | asset_url }}"
+                            alt="Imagem padrão da coleção"
+                            class="collection-card-image"
+                            loading="lazy"
+                            width="243"
+                            height="363">
+                        {% endif %}
+                    {% endif %}
+                    <div class="collection-card-overlay">
+                        <h3 class="collection-card-title">{{ block.settings.collection.title| default: "Lorem Ipsum" }}</h3>
+                    </div>
+                </a>
+            {% endfor %}
+               <div class="collection-list-nav">
+                <button id="scroll_left-{{ section.id }}" aria-label="Rolar para esquerda">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1258_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
+                    <rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)" fill="white" fill-opacity="0.25"/>
+                    <rect x="44.6757" y="44.6757" width="43.3514" height="43.3514" rx="21.6757" transform="rotate(-180 44.6757 44.6757)" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
+                    <path d="M28.7497 23.0005L17.2497 23.0005M17.2497 23.0005L22.9997 28.7505M17.2497 23.0005L22.9997 17.2505" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                    <clipPath id="bgblur_0_4531_1258_clip_path" transform="translate(6.57143 6.57143)"><rect x="46" y="46" width="46" height="46" rx="23" transform="rotate(-180 46 46)"/>
+                    </clipPath></defs>
+                    </svg>
+                </button>
+                <button id="scroll_right-{{ section.id }}" aria-label="Rolar para esquerda">
+                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <foreignObject x="-6.57143" y="-6.57143" width="59.1429" height="59.1429"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(3.29px);clip-path:url(#bgblur_0_4531_1252_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="6.57143">
+                    <rect width="46" height="46" rx="23" fill="white" fill-opacity="0.25"/>
+                    <rect x="1.32431" y="1.32431" width="43.3514" height="43.3514" rx="21.6757" stroke="white" stroke-opacity="0.5" stroke-width="2.64862"/>
+                    <path d="M17.2503 22.9995H28.7503M28.7503 22.9995L23.0003 17.2495M28.7503 22.9995L23.0003 28.7495" stroke="white" stroke-width="1.64286" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                    <clipPath id="bgblur_0_4531_1252_clip_path" transform="translate(6.57143 6.57143)"><rect width="46" height="46" rx="23"/>
+                    </clipPath></defs>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} ---- JAVASCRIPT ---- {% endcomment %}
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollContainer = document.getElementById('collection-list-{{ section.id }}');
+        const scrollLeftBtn = document.getElementById('scroll-left-{{ section.id }}');
+        const scrollRightBtn = document.getElementById('scroll-right-{{ section.id }}');
+
+        if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) {
+            return;
+        }
+
+        const scrollAmount = 240;
+
+        scrollLeftBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        scrollRightBtn.addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    });
+</script>
+
+{% comment %} ---- SCHEMA ---- {% endcomment %}
+ {% schema %}
+    {
+  "name": "Lista de Coleções",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da Seção",
+      "default": "Shop by Collection"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do Título",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Coleção",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Selecione a Coleção"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem Personalizada (Opcional)",
+          "info": "Substitui a imagem padrão da coleção. Use uma imagem com proporção aproximada de 220x350."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lista de Coleções",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+ {% endschema %}

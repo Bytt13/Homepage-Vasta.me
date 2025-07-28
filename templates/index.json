@@ -11,11 +11,16 @@
     "banner": {
       "type": "banner",
       "settings": {}
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "settings": {}
     }
   },
   "order": [
     "announcement_bar",
     "header",
-    "banner"
+    "banner",
+    "collection-list"
   ]
 }
