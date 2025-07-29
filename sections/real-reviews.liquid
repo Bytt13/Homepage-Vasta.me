@@ -1,0 +1,355 @@
+{% comment %} ---- CSS (Estilos Visuais) ---- {% endcomment %}
+<style>
+  .reviews-section-wrapper--{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .reviews-section-header {
+    margin-bottom: 40px;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .reviews-section-title {
+    font-size: 38px;
+    font-weight: bold;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 10px 0;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .reviews-section-subtitle {
+    font-size: 16px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .reviews-section-subtitle .stars {
+    color: #FFB800;
+    margin-left: 5px;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .reviews-swiper-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 50px;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card {
+    background-color: #ffffff;
+    border: 1px solid #EAEAEA;
+    border-radius: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Garante que a imagem com borda arredondada funcione */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  /* --- MUDANÇA PRINCIPAL AQUI --- */
+  .reviews-section-wrapper--{{ section.id }} .review-card__image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Força a proporção de retrato (3:4) */
+    position: relative;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+  }
+  
+  .reviews-section-wrapper--{{ section.id }} .review-card__content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Faz esta área crescer para preencher o card */
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__author-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #252525;
+    margin: 0;
+  }
+  
+  .reviews-section-wrapper--{{ section.id }} .review-card__author-location {
+    font-size: 14px;
+    color: #777;
+    margin-top: 2px;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__stars {
+    color: #FFB800;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #F0F0F0;
+  }
+  
+  .reviews-section-wrapper--{{ section.id }} .review-card__product-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .review-card__product-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .swiper-pagination {
+    bottom: 0;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    opacity: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .reviews-section-wrapper--{{ section.id }} .swiper-pagination-bullet-active {
+    background-color: #00AC4F;
+  }
+</style>
+
+{% comment %} ---- HTML (A Estrutura) ---- {% endcomment %}
+<div class="reviews-section-wrapper--{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="reviews-section-header">
+    {% if section.settings.title != blank %}
+      <h2 class="reviews-section-title">{{ section.settings.title | escape }}</h2>
+    {% endif %}
+    {% if section.settings.subtitle != blank %}
+      <p class="reviews-section-subtitle">
+        {{ section.settings.subtitle | escape }}
+        <span class="stars">★★★★★</span>
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="swiper reviews-swiper-container">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="review-card" {{ block.shopify_attributes }}>
+            
+            <div class="review-card__image-wrapper">
+                {% if block.settings.author_image != blank %}
+                <img
+                    src="{{ block.settings.author_image | image_url: width: 600 }}"
+                    alt="{{ block.settings.author_image.alt | default: 'Foto do cliente' }}"
+                    class="review-card__image"
+                    loading="lazy"
+                    width="600"
+                    height="800">
+                {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg review-card__image' }}
+                {% endif %}
+            </div>
+            
+            <div class="review-card__content">
+                <div class="review-card__author-info">
+                    {% if block.settings.author_name != blank %}
+                        <p class="review-card__author-name">{{ block.settings.author_name }}</p>
+                    {% endif %}
+                    {% if block.settings.author_location != blank %}
+                        <p class="review-card__author-location">{{ block.settings.author_location }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="review-card__stars">
+                {% for i in (1..block.settings.rating) %}★{% endfor %}
+                </div>
+                
+                {% if block.settings.review_text != blank %}
+                <div class="review-card__text">{{ block.settings.review_text }}</div>
+                {% endif %}
+
+                {%- assign product = all_products[block.settings.product_handle] -%}
+                {% if product.title != blank %}
+                <div class="review-card__product-info">
+                    {% if block.settings.product_icon != blank %}
+                    <img src="{{ block.settings.product_icon | image_url: width: 64 }}" class="review-card__product-icon" alt="Ícone do produto" loading="lazy" width="32" height="32">
+                    {% else %}
+                        {% if product.featured_image %}
+                            <img src="{{ product.featured_image | image_url: width: 64 }}" class="review-card__product-icon" alt="{{ product.title | escape }}" loading="lazy" width="32" height="32">
+                        {% endif %}
+                    {% endif %}
+                    <a href="{{ product.url }}" class="review-card__product-name">{{ product.title }}</a>
+                </div>
+                {% endif %}
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+
+{% comment %} ---- JAVASCRIPT ---- {% endcomment %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiperSelector = '.reviews-section-wrapper--{{ section.id }} .reviews-swiper-container';
+    new Swiper(swiperSelector, {
+      loop: false,
+      slidesPerView: 1.5,
+      spaceBetween: 15,
+      
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+      // Breakpoints para diferentes tamanhos de tela
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 25,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        }
+      }
+    });
+  });
+</script>
+
+{% comment %} ---- SCHEMA (Painel de Personalização) ---- {% endcomment %}
+{% schema %}
+{
+  "name": "Avaliações Reais",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da Seção",
+      "default": "Real Reviews, Real Experiences"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo da Seção",
+      "default": "With 1600+ 5-star reviews"
+    },
+    {
+      "type": "header",
+      "content": "Cores da Seção"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do Título",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Cor do Subtítulo",
+      "default": "#555555"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Cartão de Avaliação",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Imagem do Cliente"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nome do Cliente",
+          "default": "Louise S."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Localização",
+          "default": "United States"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "★",
+          "label": "Avaliação (Estrelas)",
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "review_text",
+          "label": "Texto da Avaliação",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>"
+        },
+        {
+          "type": "header",
+          "content": "Produto Avaliado"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_icon",
+          "label": "Ícone do Produto (Opcional)",
+          "info": "Se vazio, usará a imagem do produto selecionado."
+        },
+        {
+          "type": "product",
+          "id": "product_handle",
+          "label": "Produto Avaliado"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Avaliações Reais",
+      "category": "Depoimentos",
+      "blocks": [
+        { "type": "review_card" },
+        { "type": "review_card" },
+        { "type": "review_card" },
+        { "type": "review_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

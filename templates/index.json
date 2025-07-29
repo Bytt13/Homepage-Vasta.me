@@ -251,6 +251,10 @@
         "background_color": "#ffffff",
         "title_color": "#000000"
       }
+    },
+    "real_reviews": {
+      "type": "real-reviews",
+      "settings": {}
     }
   },
   "order": [
@@ -260,6 +264,7 @@
     "collection-list",
     "icon_grid",
     "testimonial_banner",
-    "featured_products"
+    "featured_products",
+    "real_reviews"
   ]
 }
