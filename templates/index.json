@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "announcement_bar": {
@@ -47,25 +38,29 @@
         "collection_D46EwR": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/ef827b14ead1d4fe9216b181bd426211d5a439e8.png"
           }
         },
         "collection_XeEBCC": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/539e59b520c0d26113d5240e45c640bf063d8bc1.png"
           }
         },
         "collection_Emh7gn": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/cd1831d902a79e56130efe9052dbae3a87eb71b3.png"
           }
         },
         "collection_kqwhV4": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/f3c08708fbc516c7c6cc2ead116fd4461eafeb75.png"
           }
         },
         "collection_yqw6Pp": {
@@ -77,19 +72,22 @@
         "collection_LghVTr": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/539e59b520c0d26113d5240e45c640bf063d8bc1.png"
           }
         },
         "collection_dFrnJ4": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/ef827b14ead1d4fe9216b181bd426211d5a439e8.png"
           }
         },
         "collection_WwJmgy": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "",
+            "image": "shopify://shop_images/cd1831d902a79e56130efe9052dbae3a87eb71b3.png"
           }
         },
         "collection_T6g63j": {
