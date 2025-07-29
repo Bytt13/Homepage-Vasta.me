@@ -1,28 +1,205 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-"sections": {
+  "sections": {
     "announcement_bar": {
       "type": "announcement-bar",
-      "settings": {}
+      "settings": {
+        "text": "WE PAY SHIPPING ON ORDERS OVER $X",
+        "left_text": "info@brand.com",
+        "right_text": "+1 (111) 222-3333",
+        "background_color": "#17171a",
+        "text_color": "#ffffff"
+      }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "main-menu",
+        "background_color": "#ffffff"
+      }
     },
     "banner": {
       "type": "banner",
-      "settings": {}
+      "settings": {
+        "reviews_text": "WITH 1600+ 5-STAR REVIEWS",
+        "main_heading": "Lorem ipsum dolor sit<br>amet consectetur",
+        "subheading": "Lorem ipsum dolor sit amet consectetur. Elit elementum rhoncus.",
+        "button_text": "View More",
+        "button_link": "",
+        "background_image_opacity": 0.5,
+        "background_color": "#17171a",
+        "text_color": "#ffffff",
+        "button_color": "#00ac4f",
+        "button_text_color": "#ffffff"
+      }
     },
     "collection-list": {
       "type": "collection-list",
-      "settings": {}
+      "blocks": {
+        "collection_D46EwR": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_XeEBCC": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_Emh7gn": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_kqwhV4": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_yqw6Pp": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_LghVTr": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_dFrnJ4": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_WwJmgy": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "collection_T6g63j": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_D46EwR",
+        "collection_XeEBCC",
+        "collection_Emh7gn",
+        "collection_kqwhV4",
+        "collection_yqw6Pp",
+        "collection_LghVTr",
+        "collection_dFrnJ4",
+        "collection_WwJmgy",
+        "collection_T6g63j"
+      ],
+      "settings": {
+        "title": "Shop by Collection",
+        "background_color": "#ffffff",
+        "title_color": "#000000"
+      }
     },
     "icon_grid": {
       "type": "icon-grid",
-      "settings": {}
+      "blocks": {
+        "icon_item_tNqcz8": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/UVP_1_-_Icon_3347f808-c7bc-4953-b4f0-cf4302a184f3.png",
+            "text": "Lorem Ipsum Dolor Sit Amet Consectetur"
+          }
+        },
+        "icon_item_UyqkYD": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/UVP_2_-_Icon_ee19d921-e792-4777-bf8c-d59f41bd62e8.png",
+            "text": "Lorem Ipsum Dolor Sit Amet Consectetur"
+          }
+        },
+        "icon_item_B8nLfG": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/UVP_3_-_Icon_3a61972e-bd83-460a-9d7e-1dba539f79d5.png",
+            "text": "Lorem Ipsum Dolor Sit Amet Consectetur"
+          }
+        },
+        "icon_item_H9fiMB": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "shopify://shop_images/UVP_4_-_Icon_032abbd7-da27-423c-97fd-2b7803b6923e.png",
+            "text": "Lorem Ipsum Dolor Sit Amet Consectetur"
+          }
+        }
+      },
+      "block_order": [
+        "icon_item_tNqcz8",
+        "icon_item_UyqkYD",
+        "icon_item_B8nLfG",
+        "icon_item_H9fiMB"
+      ],
+      "settings": {
+        "title": "Shop Smarter, Shop With Vasta",
+        "background_color": "#f8f8f8",
+        "title_color": "#252525",
+        "text_color": "#555555"
+      }
     },
     "testimonial_banner": {
       "type": "testimonial-banner",
-      "settings": {}
+      "blocks": {
+        "review_NrWVQ6": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/0253a980873ac68aebe436f0d55d07b08c2901da.jpg",
+            "author_name": "John R.",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>"
+          }
+        },
+        "review_HftTWq": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/5829479656d7a6082a98f87f6514f0bceda7a094.jpg",
+            "author_name": "John R.",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_NrWVQ6",
+        "review_HftTWq"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/9f1c223547d70f6569373dfac9da30aa8515f842.png",
+        "title": "Cherished Favorites",
+        "subtitle": "Explore the Harmony of Exceptional Quality and Customer Praise",
+        "button_text": "View More",
+        "button_link": "",
+        "background_color": "#121212",
+        "overlay_opacity": 1,
+        "text_color": "#ffffff",
+        "button_color": "#00ac4f",
+        "button_text_color": "#ffffff",
+        "stars_color": "#ffd700"
+      }
     }
   },
   "order": [

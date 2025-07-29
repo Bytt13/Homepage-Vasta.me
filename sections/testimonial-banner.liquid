@@ -242,38 +242,7 @@
     },
     {
       "type": "header",
-      "content": "Layout e Posição"
-    },
-    {
-      "type": "range",
-      "id": "section_height",
-      "min": 400,
-      "max": 800,
-      "step": 20,
-      "unit": "px",
-      "label": "Altura do Banner",
-      "default": 500
-    },
-    {
-      "type": "select",
-      "id": "background_position",
-      "label": "Posição da Imagem de Fundo",
-      "options": [
-        { "value": "top left", "label": "Topo Esquerda" },
-        { "value": "top center", "label": "Topo Centro" },
-        { "value": "top right", "label": "Topo Direita" },
-        { "value": "center left", "label": "Meio Esquerda" },
-        { "value": "center center", "label": "Meio Centro" },
-        { "value": "center right", "label": "Meio Direita" },
-        { "value": "bottom left", "label": "Fundo Esquerda" },
-        { "value": "bottom center", "label": "Fundo Centro" },
-        { "value": "bottom right", "label": "Fundo Direita" }
-      ],
-      "default": "top right"
-    },
-    {
-      "type": "header",
-      "content": "Cores e Sobreposição"
+      "content": "Configurações de Cores e Sobreposição"
     },
     {
       "type": "color",
@@ -288,6 +257,7 @@
       "max": 1,
       "step": 0.1,
       "label": "Opacidade da Sobreposição",
+      "info": "Aumente para escurecer a imagem de fundo e facilitar a leitura do texto. 0 é sem sobreposição, 1 é totalmente preto.",
       "default": 0.5
     },
     {
@@ -321,10 +291,33 @@
       "name": "Testemunho",
       "limit": 2,
       "settings": [
-        { "type": "image_picker", "id": "avatar", "label": "Avatar do Cliente" },
-        { "type": "text", "id": "author_name", "label": "Nome do Cliente", "default": "John R." },
-        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "unit": "★", "label": "Avaliação (Estrelas)", "default": 5 },
-        { "type": "richtext", "id": "review_text", "label": "Texto do Testemunho", "default": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>" }
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar do Cliente"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nome do Cliente",
+          "default": "John R."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "★",
+          "label": "Avaliação (Estrelas)",
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "review_text",
+          "label": "Texto do Testemunho",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>"
+        }
       ]
     }
   ],
