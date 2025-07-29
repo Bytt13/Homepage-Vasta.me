@@ -251,53 +251,6 @@
         "background_color": "#ffffff",
         "title_color": "#000000"
       }
-    },
-    "real_reviews": {
-      "type": "real-reviews",
-      "blocks": {
-        "review_card_LGEbFN": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Louise S.",
-            "author_location": "United States",
-            "rating": 5,
-            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>",
-            "product_handle": ""
-          }
-        },
-        "review_card_yLa9Cg": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Louise S.",
-            "author_location": "United States",
-            "rating": 5,
-            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>",
-            "product_handle": ""
-          }
-        },
-        "review_card_iMGddC": {
-          "type": "review_card",
-          "settings": {
-            "author_name": "Louise S.",
-            "author_location": "United States",
-            "rating": 5,
-            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>",
-            "product_handle": ""
-          }
-        }
-      },
-      "block_order": [
-        "review_card_LGEbFN",
-        "review_card_yLa9Cg",
-        "review_card_iMGddC"
-      ],
-      "settings": {
-        "title": "Real Reviews, Real Experiences",
-        "subtitle": "With 1600+ 5-star reviews",
-        "background_color": "#ffffff",
-        "title_color": "#000000",
-        "subtitle_color": "#555555"
-      }
     }
   },
   "order": [
@@ -308,6 +261,5 @@
     "icon_grid",
     "testimonial_banner",
     "featured_products",
-    "real_reviews"
   ]
 }
