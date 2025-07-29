@@ -198,6 +198,10 @@
         "button_text_color": "#ffffff",
         "stars_color": "#ffd700"
       }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {}
     }
   },
   "order": [
@@ -206,6 +210,7 @@
     "banner",
     "collection-list",
     "icon_grid",
-    "testimonial_banner"
+    "testimonial_banner",
+    "featured_products"
   ]
 }
