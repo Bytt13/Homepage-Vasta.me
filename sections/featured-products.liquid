@@ -30,20 +30,20 @@
     color: #000;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
   }
 
   .product-card__image-wrapper {
     width: 100%;
     padding-top: 100%; 
     position: relative;
-    background-color: #f5f5f5;
+    background-color: #F5F6FA;
   }
 
   .product-card__image {
@@ -63,6 +63,7 @@
   .product-card__title {
     font-size: 18px;
     margin: 0 0 10px 0;
+    font-weight: 400;
   }
 
   .product-card__reviews {
@@ -86,7 +87,7 @@
     </h2>
   {% endif %}
 
-  <div class="featured-products-grid">
+<div class="featured-products-grid">
     {% for block in section.blocks %}
       {%- assign product = block.settings.product -%}
       {% if product != blank %}
@@ -102,7 +103,13 @@
                 height="500"
               >
             {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              <img 
+                src="{{ 'placeholder-product.png' | asset_url }}" 
+                alt="Imagem de produto padrão"
+                class="product-card__image"
+                loading="lazy"
+                width="500"   
+                height="500">
             {% endif %}
           </div>
           <div class="product-card__info">
@@ -114,10 +121,15 @@
           </div>
         </a>
       {% else %}
-        {% comment %} Mostra um placeholder se nenhum produto for selecionado {% endcomment %}
         <div class="product-card">
            <div class="product-card__image-wrapper">
-             {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-card__image' }}
+                <img 
+                    src="{{ 'placeholder-product.png' | asset_url }}" 
+                    alt="Imagem de produto padrão"
+                    class="product-card__image"
+                    loading="lazy"
+                    width="500"   
+                    height="500">  
            </div>
            <div class="product-card__info">
               <h3 class="product-card__title">Product Name</h3>
@@ -126,7 +138,7 @@
                 <span>(5.0 of 800 Reviews)</span>
               </div>
            </div>
-        </div>
+        </div>  
       {% endif %}
     {% endfor %}
   </div>
