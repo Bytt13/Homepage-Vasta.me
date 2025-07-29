@@ -42,55 +42,56 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Garante que a imagem com borda arredondada funcione */
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   }
 
-  /* --- MUDANÇA PRINCIPAL AQUI --- */
+  /* --- AJUSTES DE ALTURA AQUI --- */
   .reviews-section-wrapper--{{ section.id }} .review-card__image-wrapper {
     width: 100%;
-    aspect-ratio: 3 / 4; /* Força a proporção de retrato (3:4) */
+    aspect-ratio: 4 / 5; /* MUDANÇA: Imagem um pouco menos alta */
     position: relative;
   }
 
   .reviews-section-wrapper--{{ section.id }} .review-card__image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    object-fit: cover;
   }
   
   .reviews-section-wrapper--{{ section.id }} .review-card__content {
-      padding: 20px;
+      padding: 15px; /* MUDANÇA: Menos preenchimento interno */
       display: flex;
       flex-direction: column;
-      flex-grow: 1; /* Faz esta área crescer para preencher o card */
+      flex-grow: 1;
   }
 
   .reviews-section-wrapper--{{ section.id }} .review-card__author-name {
-    font-size: 18px;
+    font-size: 17px; /* MUDANÇA: Fonte um pouco menor */
     font-weight: bold;
     color: #252525;
     margin: 0;
   }
   
   .reviews-section-wrapper--{{ section.id }} .review-card__author-location {
-    font-size: 14px;
+    font-size: 13px; /* MUDANÇA: Fonte um pouco menor */
     color: #777;
     margin-top: 2px;
   }
 
   .reviews-section-wrapper--{{ section.id }} .review-card__stars {
     color: #FFB800;
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 16px; /* MUDANÇA: Fonte um pouco menor */
+    margin: 8px 0; /* MUDANÇA: Menos espaço vertical */
   }
 
   .reviews-section-wrapper--{{ section.id }} .review-card__text {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #555;
-    margin: 0 0 20px 0;
+    font-size: 14px; /* MUDANÇA: Fonte menor */
+    line-height: 1;
+    color: #252525;
+    margin: 0 0 15px 0; /* MUDANÇA: Menos espaço abaixo */
     flex-grow: 1;
+    text-align: left;
   }
 
   .reviews-section-wrapper--{{ section.id }} .review-card__product-info {
@@ -98,7 +99,7 @@
     align-items: center;
     gap: 10px;
     margin-top: auto;
-    padding-top: 15px;
+    padding-top: 10px; /* MUDANÇA: Menos espaço acima */
     border-top: 1px solid #F0F0F0;
   }
   
@@ -114,6 +115,8 @@
     color: #333;
     text-decoration: none;
   }
+  /* --- FIM DOS AJUSTES DE ALTURA --- */
+
 
   .reviews-section-wrapper--{{ section.id }} .swiper-pagination {
     bottom: 0;
@@ -154,13 +157,13 @@
             
             <div class="review-card__image-wrapper">
                 {% if block.settings.author_image != blank %}
-                <img
-                    src="{{ block.settings.author_image | image_url: width: 600 }}"
-                    alt="{{ block.settings.author_image.alt | default: 'Foto do cliente' }}"
-                    class="review-card__image"
+                <img 
+                    src="{{ block.settings.author_image | image_url: width: 600 }}" 
+                    alt="{{ block.settings.author_image.alt | default: 'Foto do cliente' }}" 
+                    class="review-card__image" 
                     loading="lazy"
                     width="600"
-                    height="800">
+                    height="750">
                 {% else %}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg review-card__image' }}
                 {% endif %}
