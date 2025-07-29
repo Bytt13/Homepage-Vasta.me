@@ -15,12 +15,17 @@
     "collection-list": {
       "type": "collection-list",
       "settings": {}
+    },
+    "icon_grid": {
+      "type": "icon-grid",
+      "settings": {}
     }
   },
   "order": [
     "announcement_bar",
     "header",
     "banner",
-    "collection-list"
+    "collection-list",
+    "icon_grid"
   ]
 }

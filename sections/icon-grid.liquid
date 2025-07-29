@@ -1,0 +1,150 @@
+{% comment %} ---- CSS (Estilos) ---- {% endcomment %}
+<style>
+  .icon-grid-wrapper {
+    /* Pega a cor de fundo que o usuário escolher no painel */
+    background-color: {{ section.settings.background_color }};
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .icon-grid-title {
+    /* Pega a cor do título que o usuário escolher */
+    color: {{ section.settings.title_color }};
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 50px;
+  }
+
+  .icon-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+  }
+
+  .icon-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .icon-grid-item:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: -15px; 
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #0000001A;
+  }
+
+  .icon-grid-item__icon {
+    max-height: 60px;
+    width: auto;
+    margin-bottom: 20px;
+  }
+
+  .icon-grid-item__text {
+    color: {{ section.settings.text_color }};
+    font-size: 16px;
+    margin: 0;
+  }
+</style>
+
+{% comment %} ---- HTML (A Estrutura) ---- {% endcomment %}
+<div class="icon-grid-wrapper">
+  {% if section.settings.title != blank %}
+    <h2 class="icon-grid-title">{{ section.settings.title | escape }}</h2>
+  {% endif %}
+
+  <div class="icon-grid-container">
+    {% for block in section.blocks %}
+      <div class="icon-grid-item">
+        {% if block.settings.icon != blank %}
+          <img
+            src="{{ block.settings.icon | image_url: width: 120 }}"
+            alt="{{ block.settings.icon.alt | default: 'Ícone descritivo' }}"
+            class="icon-grid-item__icon"
+            loading="lazy"
+            height="60"
+            width="{{ 60 | times: block.settings.icon.aspect_ratio | round }}"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg icon-grid-item__icon' }}
+        {% endif %}
+
+        {% if block.settings.text != blank %}
+          <p class="icon-grid-item__text">{{ block.settings.text | escape }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ícones com Texto (Grid)",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título da Seção",
+      "default": "Shop Smarter, Shop With Vasta"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo",
+      "default": "#F8F8F8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do Título",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do Texto dos Ícones",
+      "default": "#555555"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_item",
+      "name": "Item (Ícone e Texto)",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Ícone"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto Descritivo",
+          "default": "Lorem Ipsum Dolor Sit Amet Consectetur"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ícones com Texto (Grid)",
+      "category": "Layout",
+      "blocks": [
+        { "type": "icon_item" },
+        { "type": "icon_item" },
+        { "type": "icon_item" },
+        { "type": "icon_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
