@@ -19,6 +19,10 @@
     "icon_grid": {
       "type": "icon-grid",
       "settings": {}
+    },
+    "testimonial_banner": {
+      "type": "testimonial-banner",
+      "settings": {}
     }
   },
   "order": [
@@ -26,6 +30,7 @@
     "header",
     "banner",
     "collection-list",
-    "icon_grid"
+    "icon_grid",
+    "testimonial_banner"
   ]
 }

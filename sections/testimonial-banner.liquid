@@ -1,0 +1,341 @@
+{% comment %} ---- CSS ---- {% endcomment %}
+<style>
+    .testimonial-banner__wrapper {
+        background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');
+        background-color: {{ section.settings.background_color }};
+        color: {{ section.settings.text_color }};
+        background-position: {{ section.settings.background_position }};
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 80px 40px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: {{ section.settings.section_height }}px;
+  }
+    .testimonial-banner__wrapper::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+         background: linear-gradient(
+            to right,
+            rgba(0, 0, 0, {{ section.settings.overlay_opacity }}),
+            rgba(0, 0, 0, 0)
+        );
+        z-index: 1;
+    }
+
+  .testimonial-banner__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1440px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-bottom: 300px;
+  }
+
+  .testimonial-banner__content {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-banner__title {
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+
+  .testimonial-banner__subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+    margin: 0 0 30px 0;
+    white-space: nowrap;
+  }
+
+  .testimonial-banner__button {
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 14px 40px;
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .testimonial-banner__button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  a.testimonial-banner__button {
+    background-color: {{ section.settings.button_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 14px 40px;
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block; /* Garante que o padding funcione corretamente */
+  }
+
+  a.testimonial-banner__button:hover {
+    transform: scale(1.15);
+  }
+
+  .testimonial-banner__image {
+    max-width: 550px;
+    height: auto;
+  }
+
+  .testimonial-banner__reviews-wrapper {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    max-width: 800px; 
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background: none;
+    border: none;
+    padding: 20px;
+    max-width: 300px;
+    z-index: 3;
+    padding-bottom: 250px;
+    justify-content: center;
+  }
+
+  .review-card__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .review-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+
+  .review-card__author-info {
+    font-size: 14px;
+  }
+
+  .review-card__author-name {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .review-card__stars {
+    color: {{ section.settings.stars_color }};
+  }
+
+  .review-card__text {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0;
+    text-align: center;
+  }
+</style>
+
+{% comment %} ---- HTML ---- {% endcomment %}
+<div class="testimonial-banner__wrapper">
+  <div class="testimonial-banner__container">
+
+    <div class="testimonial-banner__content">
+      <h2 class="testimonial-banner__title">{{ section.settings.title | escape }}</h2>
+      <p class="testimonial-banner__subtitle">{{ section.settings.subtitle | escape }}</p>
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="testimonial-banner__button">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.blocks.size > 0 %}
+  <div class="testimonial-banner__reviews-wrapper">
+    {% for block in section.blocks %}
+      <div class="review-card">
+        <div class="review-card__header">
+          {% if block.settings.avatar != blank %}
+            <img src="{{ block.settings.avatar | image_url: width: 80 }}" class="review-card__avatar" alt="{{ block.settings.author_name | escape }}" width="40" height="40">
+          {% endif %}
+          <div class="review-card__author-info">
+            <p class="review-card__author-name">{{ block.settings.author_name }}</p>
+            <div class="review-card__stars">
+              {% for i in (1..block.settings.rating) %}
+                <span>★</span>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="review-card__text">{{ block.settings.review_text }}</div>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+
+{% comment %} ---- SCHEMA ---- {% endcomment %}
+{% schema %}
+{
+  "name": "Banner com Testemunhos",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conteúdo Principal"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Imagem de Fundo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Cherished Favorites"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Explore the Harmony of Exceptional Quality and Customer Praise"
+    },
+    {
+      "type": "header",
+      "content": "Botão"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto do Botão",
+      "default": "View More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do Botão"
+    },
+    {
+      "type": "header",
+      "content": "Layout e Posição"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Altura do Banner",
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "background_position",
+      "label": "Posição da Imagem de Fundo",
+      "options": [
+        { "value": "top left", "label": "Topo Esquerda" },
+        { "value": "top center", "label": "Topo Centro" },
+        { "value": "top right", "label": "Topo Direita" },
+        { "value": "center left", "label": "Meio Esquerda" },
+        { "value": "center center", "label": "Meio Centro" },
+        { "value": "center right", "label": "Meio Direita" },
+        { "value": "bottom left", "label": "Fundo Esquerda" },
+        { "value": "bottom center", "label": "Fundo Centro" },
+        { "value": "bottom right", "label": "Fundo Direita" }
+      ],
+      "default": "top right"
+    },
+    {
+      "type": "header",
+      "content": "Cores e Sobreposição"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo (se não houver imagem)",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Opacidade da Sobreposição",
+      "default": 0.5
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do Texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Cor do Fundo do Botão",
+      "default": "#00AC4F"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Cor do Texto do Botão",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Cor das Estrelas",
+      "default": "#FFD700"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Testemunho",
+      "limit": 2,
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar do Cliente" },
+        { "type": "text", "id": "author_name", "label": "Nome do Cliente", "default": "John R." },
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "unit": "★", "label": "Avaliação (Estrelas)", "default": 5 },
+        { "type": "richtext", "id": "review_text", "label": "Texto do Testemunho", "default": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner com Testemunhos",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
