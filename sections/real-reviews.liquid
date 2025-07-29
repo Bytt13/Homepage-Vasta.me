@@ -1,0 +1,386 @@
+{% comment %}
+------------------------------------------------------------------------------------------------------------------------
+CSS (ESTILOS)
+- Ajustado o padding para que a imagem não tenha espaços em branco ao redor.
+------------------------------------------------------------------------------------------------------------------------
+{% endcomment %}
+<style>
+  .real-reviews-wrapper--{{section.id}} {
+    background-color: {{ section.settings.background_color }};
+    padding: 60px 0;
+  }
+
+  .real-reviews-header--{{section.id}} {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .real-reviews-title--{{section.id}} {
+    font-size: 36px;
+    font-weight: bold;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 10px 0;
+  }
+
+  .real-reviews-subtitle--{{section.id}} {
+    font-size: 16px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .real-reviews-subtitle--{{section.id}} .stars {
+    color: #FFD700;
+    margin-left: 5px;
+  }
+
+  .real-reviews-container--{{section.id}} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .review-card--{{section.id}} {
+    display: flex;
+    flex-direction: column;
+    width: 216px;
+    height: 511px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .review-card__reviewer-image--{{section.id}} {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    flex-shrink: 0; /* Impede que a imagem encolha */
+  }
+
+  .review-card__review-part--{{section.id}} {
+    padding: 15px;
+    flex-grow: 1; /* Faz esta parte crescer para preencher o espaço */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review-card__author--{{section.id}} {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 2px 0;
+  }
+
+  .review-card__location--{{section.id}} {
+    font-size: 14px;
+    color: #777;
+    margin: 0 0 10px 0;
+  }
+
+  .review-card__stars--{{section.id}} {
+    color: #FFD700;
+    margin-bottom: 10px;
+  }
+
+  .review-card__text--{{section.id}} {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .review-card__divider--{{section.id}} {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 0 15px; /* Apenas margem horizontal */
+  }
+
+  .review-card__product-part--{{section.id}} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: #fafafa;
+    flex-shrink: 0; /* Impede que esta parte encolha */
+  }
+
+  .review-card__product-image--{{section.id}} {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .review-card__product-name--{{section.id}} {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+  }
+
+  /* Estilos do Swiper escopados para esta seção */
+  .real-reviews-container--{{section.id}} .swiper-container {
+    padding: 20px 0 50px 0;
+  }
+
+  .real-reviews-container--{{section.id}} .swiper-pagination {
+    bottom: 0px !important;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
+  .real-reviews-container--{{section.id}} .swiper-pagination-bullet {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    margin: 0 5px !important;
+  }
+
+  .real-reviews-container--{{section.id}} .swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
+  }
+</style>
+
+{% comment %}
+------------------------------------------------------------------------------------------------------------------------
+HTML (ESTRUTURA)
+- A imagem do cliente foi movida para fora do `div` que continha o padding, tornando-a um filho direto do card.
+- O conteúdo de texto agora está dentro de `review-card__review-part` que contém o padding.
+------------------------------------------------------------------------------------------------------------------------
+{% endcomment %}
+<div class="real-reviews-wrapper--{{section.id}}" data-section-id="{{ section.id }}">
+  <div class="real-reviews-header--{{section.id}}">
+    <h2 class="real-reviews-title--{{section.id}}">{{ section.settings.title | escape }}</h2>
+    <p class="real-reviews-subtitle--{{section.id}}">
+      {{ section.settings.subtitle | escape }}
+      <span class="stars">★★★★★</span>
+    </p>
+  </div>
+
+  <div class="real-reviews-container--{{section.id}}">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="review-card--{{section.id}}">
+
+              {% if block.settings.reviewer_image != blank %}
+                <img
+                  src="{{ block.settings.reviewer_image | image_url: width: 440 }}"
+                  alt="{{ block.settings.reviewer_image.alt | default: block.settings.author_name | escape }}"
+                  class="review-card__reviewer-image--{{section.id}}"
+                  loading="lazy"
+                  width="216"
+                  height="250">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg review-card__reviewer-image--' | append: section.id }}
+              {% endif %}
+
+              <div class="review-card__review-part--{{section.id}}">
+                <h3 class="review-card__author--{{section.id}}">{{ block.settings.author_name | escape }}</h3>
+                <p class="review-card__location--{{section.id}}">{{ block.settings.author_location | escape }}</p>
+                <div class="review-card__stars--{{section.id}}">
+                  {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+                  {%- assign empty_stars = 5 | minus: block.settings.rating -%}
+                  {%- for i in (1..empty_stars) -%}<span style="color: #ddd;">★</span>{%- endfor -%}
+                </div>
+                <div class="review-card__text--{{section.id}}">{{ block.settings.review_text }}</div>
+              </div>
+
+              <hr class="review-card__divider--{{section.id}}">
+              <div class="review-card__product-part--{{section.id}}">
+                {% if block.settings.product_image != blank %}
+                  <img
+                    src="{{ block.settings.product_image | image_url: width: 80 }}"
+                    alt="{{ block.settings.product_image.alt | default: 'Product image' }}"
+                    class="review-card__product-image--{{section.id}}"
+                    loading="lazy"
+                    width="40"
+                    height="40">
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg review-card__product-image--' | append: section.id }}
+                {% endif %}
+                <p class="review-card__product-name--{{section.id}}">{{ block.settings.product_name | escape }}</p>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const swiperContainer = document.querySelector(`[data-section-id="${sectionId}"] .swiper-container`);
+
+    if (swiperContainer) {
+      const swiper = new Swiper(swiperContainer, {
+        loop: false,
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        centeredSlides: false,
+
+        pagination: {
+          el: `[data-section-id="${sectionId}"] .swiper-pagination`,
+          clickable: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '">' + (index + 1) + '</span>';
+          },
+        },
+        
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 15,
+            centeredSlides: true,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            centeredSlides: false,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            centeredSlides: false,
+          }
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Reais",
+  "tag": "section",
+  "class": "section-real-reviews",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cabeçalho da Seção"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Real Reviews, Real Experiences"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "With 1600+ 5-star reviews"
+    },
+    {
+      "type": "header",
+      "content": "Configurações de Cor"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo da Seção",
+      "default": "#F8F8F8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do Título",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Cor do Subtítulo",
+      "default": "#555555"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Card de Review",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Conteúdo da Review"
+        },
+        {
+          "type": "image_picker",
+          "id": "reviewer_image",
+          "label": "Imagem do Cliente"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nome do Cliente",
+          "default": "Louise S."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Localização do Cliente",
+          "default": "United States"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "★",
+          "label": "Avaliação (Estrelas)",
+          "default": 5
+        },
+        {
+          "type": "richtext",
+          "id": "review_text",
+          "label": "Texto do Review",
+          "default": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Produto Mencionado"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Imagem do Produto"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Nome do Produto",
+          "default": "Product Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Reais",
+      "category": "Conteúdo",
+      "blocks": [
+        { "type": "review_card" },
+        { "type": "review_card" },
+        { "type": "review_card" },
+        { "type": "review_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
