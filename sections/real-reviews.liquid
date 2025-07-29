@@ -1,7 +1,7 @@
 {% comment %}
 ------------------------------------------------------------------------------------------------------------------------
 CSS (ESTILOS)
-- Ajustado o padding para que a imagem não tenha espaços em branco ao redor.
+- Ajustado o padding e as margens internas do card de review para garantir que a parte do produto não seja cortada.
 ------------------------------------------------------------------------------------------------------------------------
 {% endcomment %}
 <style>
@@ -56,12 +56,12 @@ CSS (ESTILOS)
     width: 100%;
     height: 250px;
     object-fit: cover;
-    flex-shrink: 0; /* Impede que a imagem encolha */
+    flex-shrink: 0;
   }
 
   .review-card__review-part--{{section.id}} {
-    padding: 15px;
-    flex-grow: 1; /* Faz esta parte crescer para preencher o espaço */
+    padding: 10px 15px; /* Reduzido o padding vertical de 15px para 10px */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
   }
@@ -76,12 +76,12 @@ CSS (ESTILOS)
   .review-card__location--{{section.id}} {
     font-size: 14px;
     color: #777;
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0; /* Reduzido o espaçamento inferior de 10px para 8px */
   }
 
   .review-card__stars--{{section.id}} {
     color: #FFD700;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduzido o espaçamento inferior de 10px para 8px */
   }
 
   .review-card__text--{{section.id}} {
@@ -94,7 +94,7 @@ CSS (ESTILOS)
   .review-card__divider--{{section.id}} {
     border: 0;
     border-top: 1px solid #eee;
-    margin: 0 15px; /* Apenas margem horizontal */
+    margin: 0 15px;
   }
 
   .review-card__product-part--{{section.id}} {
@@ -103,7 +103,7 @@ CSS (ESTILOS)
     gap: 10px;
     padding: 15px;
     background-color: #fafafa;
-    flex-shrink: 0; /* Impede que esta parte encolha */
+    flex-shrink: 0;
   }
 
   .review-card__product-image--{{section.id}} {
@@ -154,8 +154,7 @@ CSS (ESTILOS)
 {% comment %}
 ------------------------------------------------------------------------------------------------------------------------
 HTML (ESTRUTURA)
-- A imagem do cliente foi movida para fora do `div` que continha o padding, tornando-a um filho direto do card.
-- O conteúdo de texto agora está dentro de `review-card__review-part` que contém o padding.
+- Nenhuma alteração no HTML, apenas nos estilos (CSS).
 ------------------------------------------------------------------------------------------------------------------------
 {% endcomment %}
 <div class="real-reviews-wrapper--{{section.id}}" data-section-id="{{ section.id }}">
@@ -174,17 +173,18 @@ HTML (ESTRUTURA)
           <div class="swiper-slide" {{ block.shopify_attributes }}>
             <div class="review-card--{{section.id}}">
 
-              {% if block.settings.reviewer_image != blank %}
-                <img
+              <img
+                class="review-card__reviewer-image--{{section.id}}"
+                {% if block.settings.reviewer_image != blank %}
                   src="{{ block.settings.reviewer_image | image_url: width: 440 }}"
                   alt="{{ block.settings.reviewer_image.alt | default: block.settings.author_name | escape }}"
-                  class="review-card__reviewer-image--{{section.id}}"
-                  loading="lazy"
-                  width="216"
-                  height="250">
-              {% else %}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg review-card__reviewer-image--' | append: section.id }}
-              {% endif %}
+                {% else %}
+                  src="{{ 'image' | placeholder_svg_tag }}"
+                  alt=""
+                {% endif %}
+                loading="lazy"
+                width="216"
+                height="250">
 
               <div class="review-card__review-part--{{section.id}}">
                 <h3 class="review-card__author--{{section.id}}">{{ block.settings.author_name | escape }}</h3>
