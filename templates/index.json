@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "announcement_bar": {
@@ -201,7 +210,47 @@
     },
     "featured_products": {
       "type": "featured-products",
-      "settings": {}
+      "blocks": {
+        "product_card_E3kFtb": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_QQerhn": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_PYGcWb": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_GgfX9Q": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_E3kFtb",
+        "product_card_QQerhn",
+        "product_card_PYGcWb",
+        "product_card_GgfX9Q"
+      ],
+      "settings": {
+        "title": "Best Selling Products",
+        "background_color": "#ffffff",
+        "title_color": "#000000"
+      }
     }
   },
   "order": [
