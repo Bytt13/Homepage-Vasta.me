@@ -1,0 +1,420 @@
+{% comment %}
+  ============================================================
+  RODAPÉ COMPLETO - VERSÃO FINAL
+  ============================================================
+  - Layout ajustado (menus à direita, coleções abaixo).
+  - Coleções em linha única de 4.
+  - Overlay gradiente e título branco nas imagens de coleção.
+{% endcomment %}
+
+<footer class="footer-v2" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="footer-v2__container page-width">
+
+    {% comment %} Linha Superior: Newsletter à esquerda, Menus à direita {% endcomment %}
+    <div class="footer-v2__top-row">
+      <div class="footer-v2__newsletter-wrapper">
+        {% if section.settings.logo %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 200 }}"
+            alt="{{ section.settings.logo.alt | default: 'Logo' }}"
+            class="footer-v2__logo"
+            loading="lazy"
+            width="200"
+            height="{{ 200 | divided_by: section.settings.logo.aspect_ratio | round }}"
+          >
+        {% endif %}
+
+        <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.newsletter_heading | escape }}</h3>
+        {%- form 'customer', id: 'ContactFooter', class: 'footer-v2__newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="footer-v2__newsletter-fields">
+            <input
+              id="NewsletterForm--{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              class="footer-v2__newsletter-input"
+              value=""
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="Enter Email Address"
+              required
+            >
+            <button type="submit" class="footer-v2__newsletter-button" name="commit">
+              {{ section.settings.newsletter_button_text | escape }}
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+
+      <div class="footer-v2__menus-wrapper">
+        <div class="footer-v2__grid-item">
+          <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.info_menu_heading | escape }}</h3>
+          <ul class="footer-v2__linklist">
+            {%- for link in section.settings.info_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        <div class="footer-v2__grid-item">
+          <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.care_menu_heading | escape }}</h3>
+          <ul class="footer-v2__linklist">
+            {%- for link in section.settings.care_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Linha Inferior: Coleções Populares {% endcomment %}
+    <div class="footer-v2__collections-wrapper">
+      <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.collections_heading | escape }}</h3>
+      <div class="footer-v2__collections-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'collection_item' -%}
+            <a href="{{ block.settings.collection.url | default: '#' }}" class="footer-v2__collection-link">
+              <div class="footer-v2__collection-image-wrapper">
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 400 }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.collection.title }}"
+                    loading="lazy"
+                    width="400"
+                    height="{{ 400 | divided_by: block.settings.image.aspect_ratio | round }}"
+                  >
+                {% elsif block.settings.collection.image %}
+                   <img
+                    src="{{ block.settings.collection.image | image_url: width: 400 }}"
+                    alt="{{ block.settings.collection.title }}"
+                    loading="lazy"
+                    width="400"
+                    height="{{ 400 | divided_by: block.settings.collection.image.aspect_ratio | round }}"
+                  >
+                {% else %}
+                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+              <span class="footer-v2__collection-title">{{ block.settings.collection.title | default: "Collection" }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {% comment %} Linha de Copyright e Pagamentos (Contato foi removido para simplificar o layout conforme imagem) {% endcomment %}
+    <div class="footer-v2__bottom">
+      <div class="footer-v2__copyright">
+        {{ section.settings.copyright_text }}
+      </div>
+      <div class="footer-v2__payment-icons">
+        {%- if section.settings.show_payment_icons -%}
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .footer-v2 {
+    padding: 60px 0 30px;
+  }
+  .footer-v2__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .footer-v2__top-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 40px;
+  }
+  .footer-v2__logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .footer-v2__newsletter-wrapper h3,
+  .footer-v2__grid-item h3,
+  .footer-v2__collections-wrapper h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .footer-v2__newsletter-form {
+    margin-top: 15px;
+  }
+  .footer-v2__newsletter-fields {
+    display: flex;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 500px;
+  }
+  .footer-v2__newsletter-input {
+    flex-grow: 1;
+    border: none;
+    padding: 12px;
+    background-color: transparent;
+    color: #fff;
+  }
+  .footer-v2__newsletter-input::placeholder {
+    color: #888;
+  }
+  .footer-v2__newsletter-button {
+    border: none;
+    background-color: #28a745;
+    color: white;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .footer-v2__menus-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .footer-v2__linklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-v2__linklist li {
+    margin-bottom: 10px;
+  }
+  .footer-v2__linklist a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+  }
+  .footer-v2__linklist a:hover {
+    opacity: 0.7;
+  }
+
+  .footer-v2__collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .footer-v2__collection-link {
+    text-decoration: none;
+    color: white;
+    position: relative; /* Essencial para o overlay e o título */
+    display: block;
+  }
+  
+  .footer-v2__collection-image-wrapper {
+    aspect-ratio: 1 / 1.2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .footer-v2__collection-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .footer-v2__collection-link:hover .footer-v2__collection-image-wrapper img {
+      transform: scale(1.05);
+  }
+  
+  /* NOVO: Pseudo-elemento para o overlay gradiente */
+  .footer-v2__collection-image-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+      border-radius: 4px;
+      pointer-events: none; /* Permite clicar no link através do overlay */
+  }
+  
+  /* NOVO: Estilo para o título da coleção */
+  .footer-v2__collection-title {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+      font-size: 16px;
+      font-weight: 500;
+      z-index: 2;
+  }
+  
+  .footer-v2__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    margin-top: 50px;
+    font-size: 14px;
+    color: #aaa;
+  }
+  .footer-v2__payment-icons {
+    display: flex;
+    gap: 5px;
+  }
+  .payment-icon {
+    height: 24px;
+  }
+
+  /* Responsividade */
+  @media (max-width: 990px) {
+    .footer-v2__top-row {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .footer-v2__collections-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-v2__menus-wrapper {
+        justify-content: flex-start;
+    }
+    .footer-v2__bottom {
+      flex-direction: column-reverse;
+      gap: 20px;
+      text-align: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Rodapé (Footer)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cores"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Cor de Fundo",
+      "default": "#1C1C1C"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Cor do Texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Cor dos Títulos",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Coluna de Newsletter"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo do Rodapé"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Título da Newsletter",
+      "default": "Enter Your Email To Receive 15% Coupon Immediately"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Texto do Botão da Newsletter",
+      "default": "Give Me 15% OFF"
+    },
+    {
+      "type": "header",
+      "content": "Coluna de Coleções"
+    },
+    {
+      "type": "text",
+      "id": "collections_heading",
+      "label": "Título da Coluna de Coleções",
+      "default": "Popular Collections"
+    },
+    {
+      "type": "header",
+      "content": "Menus de Navegação"
+    },
+    {
+      "type": "text",
+      "id": "info_menu_heading",
+      "label": "Título do Menu 'Informação'",
+      "default": "Information"
+    },
+    {
+      "type": "link_list",
+      "id": "info_menu",
+      "label": "Menu de Informações"
+    },
+    {
+      "type": "text",
+      "id": "care_menu_heading",
+      "label": "Título do Menu 'Customer Care'",
+      "default": "Customer Care"
+    },
+    {
+      "type": "link_list",
+      "id": "care_menu",
+      "label": "Menu de Atendimento"
+    },
+    {
+      "type": "header",
+      "content": "Parte Inferior do Rodapé"
+    },
+    {
+      "type": "richtext",
+      "id": "copyright_text",
+      "label": "Texto de Copyright",
+      "default": "<p>Copyright © 2023 Clench Fitness. All Right Reserved.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Mostrar ícones de pagamento",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Item de Coleção",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem Personalizada",
+          "info": "Opcional. Se não for definida, usará a imagem da coleção."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
