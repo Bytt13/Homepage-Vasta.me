@@ -1,9 +1,8 @@
 {% comment %}
   ============================================================
-  RODAPÉ COMPLETO - VERSÃO FINAL COM CONTATO (30/07)
+  RODAPÉ COMPLETO - VERSÃO FINALÍSSIMA 2.0 (30/07 - 2AM Edition)
   ============================================================
-  - Adicionada a seção "Get in Contact".
-  - Espaçamento vertical reduzido entre as seções.
+  - Ícones e copyright movidos para a DIREITA.
 {% endcomment %}
 
 <footer class="footer-v4" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
@@ -100,7 +99,6 @@
       </div>
     </div>
     
-    {% comment %} NOVA SEÇÃO "GET IN CONTACT" {% endcomment %}
     <div class="footer-v4__contact-wrapper">
       <h3 class="footer-v4__heading">{{ section.settings.contact_heading | escape }}</h3>
       <div class="footer-v4__contact-details">
@@ -126,15 +124,17 @@
     </div>
 
     <div class="footer-v4__bottom">
-      <div class="footer-v4__copyright">
-        {{ section.settings.copyright_text }}
-      </div>
-      <div class="footer-v4__payment-icons">
-        {%- if section.settings.show_payment_icons -%}
-          {%- for type in shop.enabled_payment_types -%}
-            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
-          {%- endfor -%}
-        {%- endif -%}
+      <div class="footer-v4__right-column">
+        <div class="footer-v4__payment-icons">
+          {%- if section.settings.show_payment_icons -%}
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <div class="footer-v4__copyright">
+          {{ section.settings.copyright_text }}
+        </div>
       </div>
     </div>
 
@@ -155,8 +155,8 @@
     grid-template-columns: 1.5fr 1fr;
     gap: 40px;
     align-items: start;
-    padding-bottom: 25px; /* <-- ESPAÇAMENTO REDUZIDO */
-    margin-bottom: 25px; /* <-- ESPAÇAMENTO REDUZIDO */
+    padding-bottom: 25px;
+    margin-bottom: 25px;
   }
   .footer-v4__logo {
     max-width: 150px;
@@ -203,11 +203,11 @@
     border-bottom-left-radius: 25px;
     border-left: solid 1.5px #ffffff;
     transition: transform 0.3s ease;
-    margin-left: -15px; 
+    margin-left: -15px;
   }
 
   .footer-v4__newsletter-button:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
   }
 
   .footer-v4__menus-wrapper {
@@ -309,16 +309,22 @@
   
   .footer-v4__bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Alterado para a direita */
     align-items: center;
     padding-top: 20px;
     margin-top: 50px;
     font-size: 14px;
     color: #aaa;
   }
+  .footer-v4__right-column { /* Nova classe para o container da direita */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinha os itens dentro dele para a direita */
+  }
   .footer-v4__payment-icons {
     display: flex;
     gap: 5px;
+    margin-bottom: 5px; /* Mantém o espaçamento */
   }
   .payment-icon {
     height: 24px;
@@ -340,9 +346,13 @@
         justify-content: flex-start;
     }
     .footer-v4__bottom {
-      flex-direction: column-reverse;
-      gap: 20px;
+      flex-direction: column;
+      align-items: center; /* Centraliza no mobile, o que é um bom padrão */
+      gap: 15px;
       text-align: center;
+    }
+    .footer-v4__right-column {
+        align-items: center; /* Centraliza a coluna no mobile */
     }
   }
 </style>
