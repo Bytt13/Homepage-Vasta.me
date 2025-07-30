@@ -254,6 +254,176 @@
     },
     "real_reviews": {
       "type": "real-reviews",
+      "blocks": {
+        "review_card_XP7Bpq": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d423f44a6b4fe3ff4f21586f26a05d3f8d5a7827.png",
+            "author_name": "Louise S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_4iik4Q": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/2c2c642820edddf07f67e75f4b34b78031bff05f.png",
+            "author_name": "Josh B.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_WCeEce": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d91c1c2d5423aba33cf865558a9b6683fb5623ff.png",
+            "author_name": "Kate S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_L6cxj4": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/82cc435a35abb77374fd68e4738cd62afd237565.png",
+            "author_name": "Mike H.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_pw7Dtc": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d423f44a6b4fe3ff4f21586f26a05d3f8d5a7827.png",
+            "author_name": "Louise S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_8t3gW9": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/2c2c642820edddf07f67e75f4b34b78031bff05f.png",
+            "author_name": "Josh B.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_8FcXra": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d91c1c2d5423aba33cf865558a9b6683fb5623ff.png",
+            "author_name": "Kate S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_NaQfXU": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/82cc435a35abb77374fd68e4738cd62afd237565.png",
+            "author_name": "Mike H.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_nDXBk7": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d423f44a6b4fe3ff4f21586f26a05d3f8d5a7827.png",
+            "author_name": "Louise S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_DmPJAF": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/2c2c642820edddf07f67e75f4b34b78031bff05f.png",
+            "author_name": "Josh B.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_nm9KYQ": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/d91c1c2d5423aba33cf865558a9b6683fb5623ff.png",
+            "author_name": "Kate S.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        },
+        "review_card_x4nxfL": {
+          "type": "review_card",
+          "settings": {
+            "reviewer_image": "shopify://shop_images/82cc435a35abb77374fd68e4738cd62afd237565.png",
+            "author_name": "Mike H.",
+            "author_location": "United States",
+            "rating": 5,
+            "review_text": "<p>Lorem ipsum dolor sit amet consectetur. Volutpat fames diam volutpat a. Ultricies lacinia eu cras massa odio.</p>",
+            "product_image": "shopify://shop_images/2f2bd4c5983d32c846ac99d58efa7d62bdb8df4f.png",
+            "product_name": "Product Name"
+          }
+        }
+      },
+      "block_order": [
+        "review_card_XP7Bpq",
+        "review_card_4iik4Q",
+        "review_card_WCeEce",
+        "review_card_L6cxj4",
+        "review_card_pw7Dtc",
+        "review_card_8t3gW9",
+        "review_card_8FcXra",
+        "review_card_NaQfXU",
+        "review_card_nDXBk7",
+        "review_card_DmPJAF",
+        "review_card_nm9KYQ",
+        "review_card_x4nxfL"
+      ],
+      "settings": {
+        "title": "Real Reviews, Real Experiences",
+        "subtitle": "With 1600+ 5-star reviews",
+        "background_color": "#f8f8f8",
+        "title_color": "#000000",
+        "subtitle_color": "#555555"
+      }
+    },
+    "suggested_products": {
+      "type": "suggested-products",
       "settings": {}
     }
   },
@@ -265,6 +435,7 @@
     "icon_grid",
     "testimonial_banner",
     "featured_products",
-    "real_reviews"
+    "real_reviews",
+    "suggested_products"
   ]
 }
