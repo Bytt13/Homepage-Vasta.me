@@ -1,38 +1,38 @@
 {% comment %}
   ============================================================
-  RODAPÉ COMPLETO - VERSÃO FINAL
+  RODAPÉ COMPLETO - VERSÃO FINAL COM CONTATO (30/07)
   ============================================================
-  - Layout ajustado (menus à direita, coleções abaixo).
-  - Coleções em linha única de 4.
-  - Overlay gradiente e título branco nas imagens de coleção.
+  - Adicionada a seção "Get in Contact".
+  - Espaçamento vertical reduzido entre as seções.
 {% endcomment %}
 
-<footer class="footer-v2" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
-  <div class="footer-v2__container page-width">
+<footer class="footer-v4" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="footer-v4__container page-width">
 
-    {% comment %} Linha Superior: Newsletter à esquerda, Menus à direita {% endcomment %}
-    <div class="footer-v2__top-row">
-      <div class="footer-v2__newsletter-wrapper">
+    <div class="footer-v4__top-row">
+      <div class="footer-v4__newsletter-wrapper">
         {% if section.settings.logo %}
-          <img
-            src="{{ section.settings.logo | image_url: width: 200 }}"
-            alt="{{ section.settings.logo.alt | default: 'Logo' }}"
-            class="footer-v2__logo"
-            loading="lazy"
-            width="200"
-            height="{{ 200 | divided_by: section.settings.logo.aspect_ratio | round }}"
-          >
+          <a href="{{ shop.url }}" aria-label="Home page">
+            <img
+              src="{{ section.settings.logo | image_url: width: 200 }}"
+              alt="{{ section.settings.logo.alt | default: shop.name }}"
+              class="footer-v4__logo"
+              loading="lazy"
+              width="200"
+              height="{{ 200 | divided_by: section.settings.logo.aspect_ratio | round }}"
+            >
+          </a>
         {% endif %}
 
-        <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.newsletter_heading | escape }}</h3>
-        {%- form 'customer', id: 'ContactFooter', class: 'footer-v2__newsletter-form' -%}
+        <h3 class="footer-v4__heading">{{ section.settings.newsletter_heading | escape }}</h3>
+        {%- form 'customer', id: 'ContactFooter', class: 'footer-v4__newsletter-form' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="footer-v2__newsletter-fields">
+          <div class="footer-v4__newsletter-fields">
             <input
               id="NewsletterForm--{{ section.id }}"
               type="email"
               name="contact[email]"
-              class="footer-v2__newsletter-input"
+              class="footer-v4__newsletter-input"
               value=""
               aria-required="true"
               autocorrect="off"
@@ -41,25 +41,25 @@
               placeholder="Enter Email Address"
               required
             >
-            <button type="submit" class="footer-v2__newsletter-button" name="commit">
+            <button type="submit" class="footer-v4__newsletter-button" name="commit">
               {{ section.settings.newsletter_button_text | escape }}
             </button>
           </div>
         {%- endform -%}
       </div>
 
-      <div class="footer-v2__menus-wrapper">
-        <div class="footer-v2__grid-item">
-          <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.info_menu_heading | escape }}</h3>
-          <ul class="footer-v2__linklist">
+      <div class="footer-v4__menus-wrapper">
+        <div class="footer-v4__grid-item">
+          <h3 class="footer-v4__heading">{{ section.settings.info_menu_heading | escape }}</h3>
+          <ul class="footer-v4__linklist">
             {%- for link in section.settings.info_menu.links -%}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
           </ul>
         </div>
-        <div class="footer-v2__grid-item">
-          <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.care_menu_heading | escape }}</h3>
-          <ul class="footer-v2__linklist">
+        <div class="footer-v4__grid-item">
+          <h3 class="footer-v4__heading">{{ section.settings.care_menu_heading | escape }}</h3>
+          <ul class="footer-v4__linklist">
             {%- for link in section.settings.care_menu.links -%}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
@@ -68,47 +68,68 @@
       </div>
     </div>
 
-    {% comment %} Linha Inferior: Coleções Populares {% endcomment %}
-    <div class="footer-v2__collections-wrapper">
-      <h3 style="color: {{ section.settings.heading_color }}">{{ section.settings.collections_heading | escape }}</h3>
-      <div class="footer-v2__collections-grid">
+    <div class="footer-v4__collections-wrapper">
+      <h3 class="footer-v4__heading">{{ section.settings.collections_heading | escape }}</h3>
+      <div class="footer-v4__collections-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'collection_item' -%}
-            <a href="{{ block.settings.collection.url | default: '#' }}" class="footer-v2__collection-link">
-              <div class="footer-v2__collection-image-wrapper">
-                {% if block.settings.image %}
+            <a href="{{ block.settings.collection.url | default: '#' }}" class="footer-v4__collection-card">
+              <div class="footer-v4__collection-image-wrapper">
+                {%- liquid
+                  assign image = block.settings.image
+                  if image == blank
+                    assign image = block.settings.collection.image
+                  endif
+                -%}
+                {% if image != blank %}
                   <img
-                    src="{{ block.settings.image | image_url: width: 400 }}"
-                    alt="{{ block.settings.image.alt | default: block.settings.collection.title }}"
+                    src="{{ image | image_url: width: 220, height: 330, crop: 'center' }}"
+                    alt="{{ image.alt | default: block.settings.collection.title }}"
                     loading="lazy"
-                    width="400"
-                    height="{{ 400 | divided_by: block.settings.image.aspect_ratio | round }}"
-                  >
-                {% elsif block.settings.collection.image %}
-                   <img
-                    src="{{ block.settings.collection.image | image_url: width: 400 }}"
-                    alt="{{ block.settings.collection.title }}"
-                    loading="lazy"
-                    width="400"
-                    height="{{ 400 | divided_by: block.settings.collection.image.aspect_ratio | round }}"
+                    width="110"
+                    height="165"
                   >
                 {% else %}
                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
               </div>
-              <span class="footer-v2__collection-title">{{ block.settings.collection.title | default: "Collection" }}</span>
+              <span class="footer-v4__collection-title">{{ block.settings.collection.title | default: "Collection" }}</span>
             </a>
           {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
+    
+    {% comment %} NOVA SEÇÃO "GET IN CONTACT" {% endcomment %}
+    <div class="footer-v4__contact-wrapper">
+      <h3 class="footer-v4__heading">{{ section.settings.contact_heading | escape }}</h3>
+      <div class="footer-v4__contact-details">
+        {%- if section.settings.phone_number != blank -%}
+          <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '+' }}" class="footer-v4__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>{{ section.settings.phone_number }}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.email_address != blank -%}
+          <a href="mailto:{{ section.settings.email_address }}" class="footer-v4__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>{{ section.settings.email_address }}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.physical_address != blank -%}
+          <span class="footer-v4__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>{{ section.settings.physical_address }}</span>
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
 
-    {% comment %} Linha de Copyright e Pagamentos (Contato foi removido para simplificar o layout conforme imagem) {% endcomment %}
-    <div class="footer-v2__bottom">
-      <div class="footer-v2__copyright">
+    <div class="footer-v4__bottom">
+      <div class="footer-v4__copyright">
         {{ section.settings.copyright_text }}
       </div>
-      <div class="footer-v2__payment-icons">
+      <div class="footer-v4__payment-icons">
         {%- if section.settings.show_payment_icons -%}
           {%- for type in shop.enabled_payment_types -%}
             {{ type | payment_type_svg_tag: class: 'payment-icon' }}
@@ -121,151 +142,181 @@
 </footer>
 
 <style>
-  .footer-v2 {
+  .footer-v4 {
     padding: 60px 0 30px;
   }
-  .footer-v2__container {
+  .footer-v4__container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
-  .footer-v2__top-row {
+  .footer-v4__top-row {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 40px;
     align-items: start;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #444;
-    margin-bottom: 40px;
+    padding-bottom: 25px; /* <-- ESPAÇAMENTO REDUZIDO */
+    margin-bottom: 25px; /* <-- ESPAÇAMENTO REDUZIDO */
   }
-  .footer-v2__logo {
+  .footer-v4__logo {
     max-width: 150px;
     height: auto;
     margin-bottom: 20px;
   }
-  .footer-v2__newsletter-wrapper h3,
-  .footer-v2__grid-item h3,
-  .footer-v2__collections-wrapper h3 {
+  .footer-v4__heading {
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
+    font-weight: 600;
   }
-  .footer-v2__newsletter-form {
+  .footer-v4__newsletter-form {
     margin-top: 15px;
   }
-  .footer-v2__newsletter-fields {
+  .footer-v4__newsletter-fields {
     display: flex;
-    border: 1px solid #444;
-    border-radius: 4px;
+    border: 1.5px solid #ffffff;
+    border-radius: 999px;
     overflow: hidden;
     max-width: 500px;
   }
-  .footer-v2__newsletter-input {
-    flex-grow: 1;
+  .footer-v4__newsletter-input {
     border: none;
+    flex-grow: 1;
     padding: 12px;
     background-color: transparent;
     color: #fff;
   }
-  .footer-v2__newsletter-input::placeholder {
-    color: #888;
+  .footer-v4__newsletter-input::placeholder {
+    color: #C2C3CC;
+    font-size: 16px;
   }
-  .footer-v2__newsletter-button {
-    border: none;
+  .footer-v4__newsletter-button {
+    border: solid 0.5px #ffffff;
     background-color: #28a745;
     color: white;
     padding: 0 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 20px;
     white-space: nowrap;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-left: solid 1.5px #ffffff;
+    transition: transform 0.3s ease;
+    margin-left: -15px; 
   }
-  .footer-v2__menus-wrapper {
+
+  .footer-v4__newsletter-button:hover {
+    transform: scale(1.05); 
+  }
+
+  .footer-v4__menus-wrapper {
     display: flex;
     justify-content: space-between;
     gap: 40px;
   }
-  .footer-v2__linklist {
+  .footer-v4__linklist {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .footer-v2__linklist li {
+  .footer-v4__linklist li {
     margin-bottom: 10px;
   }
-  .footer-v2__linklist a {
+  .footer-v4__linklist a {
     text-decoration: none;
     color: inherit;
     transition: opacity 0.3s;
   }
-  .footer-v2__linklist a:hover {
+  .footer-v4__linklist a:hover {
     opacity: 0.7;
   }
 
-  .footer-v2__collections-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  .footer-v4__collections-wrapper {
+    margin-bottom: 40px;
+  }
+  .footer-v4__collections-list {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
   }
-  
-  .footer-v2__collection-link {
+  .footer-v4__collection-card {
     text-decoration: none;
     color: white;
-    position: relative; /* Essencial para o overlay e o título */
+    position: relative;
     display: block;
+    width: 110px;
+    height: 165px;
   }
-  
-  .footer-v2__collection-image-wrapper {
-    aspect-ratio: 1 / 1.2;
-    border-radius: 4px;
+  .footer-v4__collection-image-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
     overflow: hidden;
+    background-color: #333;
   }
-  
-  .footer-v2__collection-image-wrapper img {
+  .footer-v4__collection-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-  
-  .footer-v2__collection-link:hover .footer-v2__collection-image-wrapper img {
-      transform: scale(1.05);
+  .footer-v4__collection-card:hover .footer-v4__collection-image-wrapper img {
+    transform: scale(1.05);
+  }
+  .footer-v4__collection-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .footer-v4__collection-title {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 5px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 2;
+  }
+
+  .footer-v4__contact-wrapper {
+      margin-bottom: 40px;
+  }
+  .footer-v4__contact-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+  }
+  .footer-v4__contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+  }
+  .footer-v4__icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
   }
   
-  /* NOVO: Pseudo-elemento para o overlay gradiente */
-  .footer-v2__collection-image-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
-      border-radius: 4px;
-      pointer-events: none; /* Permite clicar no link através do overlay */
-  }
-  
-  /* NOVO: Estilo para o título da coleção */
-  .footer-v2__collection-title {
-      position: absolute;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
-      font-size: 16px;
-      font-weight: 500;
-      z-index: 2;
-  }
-  
-  .footer-v2__bottom {
+  .footer-v4__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #444;
     padding-top: 20px;
     margin-top: 50px;
     font-size: 14px;
     color: #aaa;
   }
-  .footer-v2__payment-icons {
+  .footer-v4__payment-icons {
     display: flex;
     gap: 5px;
   }
@@ -275,20 +326,20 @@
 
   /* Responsividade */
   @media (max-width: 990px) {
-    .footer-v2__top-row {
+    .footer-v4__top-row {
       grid-template-columns: 1fr;
       gap: 30px;
     }
-    .footer-v2__collections-grid {
-      grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    .footer-v4__collections-list, .footer-v4__contact-details {
+      justify-content: center;
     }
   }
 
   @media (max-width: 768px) {
-    .footer-v2__menus-wrapper {
+    .footer-v4__menus-wrapper {
         justify-content: flex-start;
     }
-    .footer-v2__bottom {
+    .footer-v4__bottom {
       flex-direction: column-reverse;
       gap: 20px;
       text-align: center;
@@ -324,7 +375,7 @@
     },
     {
       "type": "header",
-      "content": "Coluna de Newsletter"
+      "content": "Seção de Newsletter"
     },
     {
       "type": "image_picker",
@@ -345,13 +396,41 @@
     },
     {
       "type": "header",
-      "content": "Coluna de Coleções"
+      "content": "Seção de Coleções"
     },
     {
       "type": "text",
       "id": "collections_heading",
-      "label": "Título da Coluna de Coleções",
+      "label": "Título da Seção de Coleções",
       "default": "Popular Collections"
+    },
+    {
+      "type": "header",
+      "content": "Seção de Contato"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Título do Contato",
+      "default": "Get in Contact"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Número de Telefone",
+      "default": "+1 (715) 600-1564"
+    },
+    {
+      "type": "text",
+      "id": "email_address",
+      "label": "Endereço de E-mail",
+      "default": "info@clenchfitness.com"
+    },
+    {
+      "type": "text",
+      "id": "physical_address",
+      "label": "Endereço Físico",
+      "default": "New Richmond, WI 54017"
     },
     {
       "type": "header",
@@ -414,6 +493,11 @@
           "info": "Opcional. Se não for definida, usará a imagem da coleção."
         }
       ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rodapé (Footer)"
     }
   ]
 }
