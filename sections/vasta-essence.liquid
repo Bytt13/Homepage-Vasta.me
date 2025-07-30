@@ -3,7 +3,7 @@
   .vasta-essence-wrapper {
     padding: 60px 20px;
     background-color: {{ section.settings.background_color }};
-    text-align: center; 
+    text-align: center;
   }
 
   .vasta-essence__title {
@@ -11,17 +11,30 @@
     font-size: {{ section.settings.title_font_size }}px;
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
   }
 
   .vasta-essence__description {
     color: {{ section.settings.description_color }};
     font-size: {{ section.settings.description_font_size }}px;
-    max-width: 800px; 
-    margin: 0 auto 25px auto; 
-    line-height: 1.2;
-    padding: 2px 50px;
-    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    position: relative;
+    max-height: 120px; 
+    overflow: hidden;
+  }
+
+  .vasta-essence__description::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 20%, {{ section.settings.background_color }} 70%);
+    z-index: 1;
+    pointer-events: none; 
   }
 
   .vasta-essence__link {
@@ -29,7 +42,15 @@
     font-size: {{ section.settings.link_font_size }}px;
     text-decoration: underline;
     font-weight: {% if section.settings.link_bold %}bold{% else %}normal{% endif %};
-    transition: opacity 0.3s ease; 
+    transition: opacity 0.3s ease;
+    position: absolute;
+    bottom: 0; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    
+    z-index: 2;
+    background: {{ section.settings.background_color }};
+    padding: 2px 8px; 
   }
 
   .vasta-essence__link:hover {
@@ -37,7 +58,7 @@
   }
 </style>
 
-{% comment %} ---- HTML ---- {% endcomment %}
+{% comment %} ---- HTML (A Estrutura da Seção) ---- {% endcomment %}
 <div class="vasta-essence-wrapper">
 
   {%- if section.settings.title != blank -%}
@@ -46,17 +67,16 @@
     </h2>
   {%- endif -%}
 
-  {%- if section.settings.description != blank -%}
-    <div class="vasta-essence__description">
+  <div class="vasta-essence__description">
+    {%- if section.settings.description != blank -%}
       {{ section.settings.description }}
-    </div>
-  {%- endif -%}
-
-  {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
-    <a href="{{ section.settings.link_url }}" class="vasta-essence__link">
-      {{ section.settings.link_text | escape }}
-    </a>
-  {%- endif -%}
+    {%- endif -%}
+    {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+      <a href="{{ section.settings.link_url }}" class="vasta-essence__link">
+        {{ section.settings.link_text | escape }}
+      </a>
+    {%- endif -%}
+  </div>
 
 </div>
 
