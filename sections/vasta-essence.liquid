@@ -1,0 +1,172 @@
+{% comment %} ---- CSS ---- {% endcomment %}
+<style>
+  .vasta-essence-wrapper {
+    padding: 60px 20px;
+    background-color: {{ section.settings.background_color }};
+    text-align: center; 
+  }
+
+  .vasta-essence__title {
+    color: {{ section.settings.title_color }};
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px; 
+  }
+
+  .vasta-essence__description {
+    color: {{ section.settings.description_color }};
+    font-size: {{ section.settings.description_font_size }}px;
+    max-width: 800px; 
+    margin: 0 auto 25px auto; 
+    line-height: 1.2;
+    padding: 2px 50px;
+    text-align: center;
+  }
+
+  .vasta-essence__link {
+    color: {{ section.settings.link_color }};
+    font-size: {{ section.settings.link_font_size }}px;
+    text-decoration: underline;
+    font-weight: {% if section.settings.link_bold %}bold{% else %}normal{% endif %};
+    transition: opacity 0.3s ease; 
+  }
+
+  .vasta-essence__link:hover {
+    opacity: 0.7;
+  }
+</style>
+
+{% comment %} ---- HTML ---- {% endcomment %}
+<div class="vasta-essence-wrapper">
+
+  {%- if section.settings.title != blank -%}
+    <h2 class="vasta-essence__title">
+      {{ section.settings.title | escape }}
+    </h2>
+  {%- endif -%}
+
+  {%- if section.settings.description != blank -%}
+    <div class="vasta-essence__description">
+      {{ section.settings.description }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.link_text != blank and section.settings.link_url != blank -%}
+    <a href="{{ section.settings.link_url }}" class="vasta-essence__link">
+      {{ section.settings.link_text | escape }}
+    </a>
+  {%- endif -%}
+
+</div>
+
+{% comment %} ---- SCHEMA ---- {% endcomment %}
+{% schema %}
+{
+  "name": "Vasta Essence",
+  "tag": "section",
+  "class": "section-vasta-essence",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conteúdo de Texto"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título Principal",
+      "default": "Vasta Essence: Dive Into Our World"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Texto Descritivo",
+      "default": "<p>Pellentesque cras adipiscing tempus libero vel nullam mauris tellus. Aliquam ultrices tellus consequat arcu. Aliquam est in neque.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Texto do Link",
+      "default": "SEE MORE"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "URL do Link"
+    },
+    {
+      "type": "header",
+      "content": "Configurações de Cor"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Cor de Fundo da Seção",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Cor do Título",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Cor da Descrição",
+      "default": "#808080"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Cor do Link",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Configurações de Fonte"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamanho da Fonte do Título",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamanho da Fonte da Descrição",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamanho da Fonte do Link",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "link_bold",
+      "label": "Deixar link em negrito?",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vasta Essence"
+    }
+  ]
+}
+{% endschema %}

@@ -466,6 +466,10 @@
         "background_color": "#ffffff",
         "title_color": "#000000"
       }
+    },
+    "vasta": {
+      "type": "vasta-essence",
+      "settings": {}
     }
   },
   "order": [
@@ -477,6 +481,7 @@
     "testimonial_banner",
     "featured_products",
     "real_reviews",
-    "suggested_products"
+    "suggested_products",
+    "vasta"
   ]
 }
