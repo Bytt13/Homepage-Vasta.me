@@ -1,21 +1,21 @@
 {% comment %}
   ============================================================
-  RODAPÉ COMPLETO - VERSÃO FINALÍSSIMA 2.0 (30/07 - 2AM Edition)
+  RODAPÉ COMPLETO - VERSÃO FINALÍSSIMA 3.0 (30/07 - 2:10 AM)
   ============================================================
-  - Ícones e copyright movidos para a DIREITA.
+  - "Get in Contact" e "Copyright" alinhados na mesma linha.
 {% endcomment %}
 
-<footer class="footer-v4" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
-  <div class="footer-v4__container page-width">
+<footer class="footer-v5" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <div class="footer-v5__container page-width">
 
-    <div class="footer-v4__top-row">
-      <div class="footer-v4__newsletter-wrapper">
+    <div class="footer-v5__top-row">
+      <div class="footer-v5__newsletter-wrapper">
         {% if section.settings.logo %}
           <a href="{{ shop.url }}" aria-label="Home page">
             <img
               src="{{ section.settings.logo | image_url: width: 200 }}"
               alt="{{ section.settings.logo.alt | default: shop.name }}"
-              class="footer-v4__logo"
+              class="footer-v5__logo"
               loading="lazy"
               width="200"
               height="{{ 200 | divided_by: section.settings.logo.aspect_ratio | round }}"
@@ -23,15 +23,15 @@
           </a>
         {% endif %}
 
-        <h3 class="footer-v4__heading">{{ section.settings.newsletter_heading | escape }}</h3>
-        {%- form 'customer', id: 'ContactFooter', class: 'footer-v4__newsletter-form' -%}
+        <h3 class="footer-v5__heading">{{ section.settings.newsletter_heading | escape }}</h3>
+        {%- form 'customer', id: 'ContactFooter', class: 'footer-v5__newsletter-form' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="footer-v4__newsletter-fields">
+          <div class="footer-v5__newsletter-fields">
             <input
               id="NewsletterForm--{{ section.id }}"
               type="email"
               name="contact[email]"
-              class="footer-v4__newsletter-input"
+              class="footer-v5__newsletter-input"
               value=""
               aria-required="true"
               autocorrect="off"
@@ -40,25 +40,25 @@
               placeholder="Enter Email Address"
               required
             >
-            <button type="submit" class="footer-v4__newsletter-button" name="commit">
+            <button type="submit" class="footer-v5__newsletter-button" name="commit">
               {{ section.settings.newsletter_button_text | escape }}
             </button>
           </div>
         {%- endform -%}
       </div>
 
-      <div class="footer-v4__menus-wrapper">
-        <div class="footer-v4__grid-item">
-          <h3 class="footer-v4__heading">{{ section.settings.info_menu_heading | escape }}</h3>
-          <ul class="footer-v4__linklist">
+      <div class="footer-v5__menus-wrapper">
+        <div class="footer-v5__grid-item">
+          <h3 class="footer-v5__heading">{{ section.settings.info_menu_heading | escape }}</h3>
+          <ul class="footer-v5__linklist">
             {%- for link in section.settings.info_menu.links -%}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
           </ul>
         </div>
-        <div class="footer-v4__grid-item">
-          <h3 class="footer-v4__heading">{{ section.settings.care_menu_heading | escape }}</h3>
-          <ul class="footer-v4__linklist">
+        <div class="footer-v5__grid-item">
+          <h3 class="footer-v5__heading">{{ section.settings.care_menu_heading | escape }}</h3>
+          <ul class="footer-v5__linklist">
             {%- for link in section.settings.care_menu.links -%}
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
             {%- endfor -%}
@@ -67,13 +67,13 @@
       </div>
     </div>
 
-    <div class="footer-v4__collections-wrapper">
-      <h3 class="footer-v4__heading">{{ section.settings.collections_heading | escape }}</h3>
-      <div class="footer-v4__collections-list">
+    <div class="footer-v5__collections-wrapper">
+      <h3 class="footer-v5__heading">{{ section.settings.collections_heading | escape }}</h3>
+      <div class="footer-v5__collections-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'collection_item' -%}
-            <a href="{{ block.settings.collection.url | default: '#' }}" class="footer-v4__collection-card">
-              <div class="footer-v4__collection-image-wrapper">
+            <a href="{{ block.settings.collection.url | default: '#' }}" class="footer-v5__collection-card">
+              <div class="footer-v5__collection-image-wrapper">
                 {%- liquid
                   assign image = block.settings.image
                   if image == blank
@@ -92,105 +92,94 @@
                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
               </div>
-              <span class="footer-v4__collection-title">{{ block.settings.collection.title | default: "Collection" }}</span>
+              <span class="footer-v5__collection-title">{{ block.settings.collection.title | default: "Collection" }}</span>
             </a>
           {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
     
-    <div class="footer-v4__contact-wrapper">
-      <h3 class="footer-v4__heading">{{ section.settings.contact_heading | escape }}</h3>
-      <div class="footer-v4__contact-details">
+    {% comment %} INÍCIO DA ALTERAÇÃO FINAL {% endcomment %}
+    <div class="footer-v5__bottom-row">
+      <div class="footer-v5__contact-details">
         {%- if section.settings.phone_number != blank -%}
-          <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '+' }}" class="footer-v4__contact-item">
-            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <a href="tel:{{ section.settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '+' }}" class="footer-v5__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v5__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             <span>{{ section.settings.phone_number }}</span>
           </a>
         {%- endif -%}
         {%- if section.settings.email_address != blank -%}
-          <a href="mailto:{{ section.settings.email_address }}" class="footer-v4__contact-item">
-            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <a href="mailto:{{ section.settings.email_address }}" class="footer-v5__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v5__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             <span>{{ section.settings.email_address }}</span>
           </a>
         {%- endif -%}
         {%- if section.settings.physical_address != blank -%}
-          <span class="footer-v4__contact-item">
-            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v4__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span class="footer-v5__contact-item">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="footer-v5__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             <span>{{ section.settings.physical_address }}</span>
           </span>
         {%- endif -%}
       </div>
-    </div>
-
-    <div class="footer-v4__bottom">
-      <div class="footer-v4__right-column">
-        <div class="footer-v4__payment-icons">
-          {%- if section.settings.show_payment_icons -%}
-            {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
-            {%- endfor -%}
-          {%- endif -%}
-        </div>
-        <div class="footer-v4__copyright">
-          {{ section.settings.copyright_text }}
-        </div>
+      <div class="footer-v5__copyright">
+        {{ section.settings.copyright_text }}
       </div>
     </div>
+    {% comment %} FIM DA ALTERAÇÃO FINAL {% endcomment %}
 
   </div>
 </footer>
 
 <style>
-  .footer-v4 {
+  .footer-v5 {
     padding: 60px 0 30px;
   }
-  .footer-v4__container {
+  .footer-v5__container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
-  .footer-v4__top-row {
+  .footer-v5__top-row {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 40px;
     align-items: start;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
+    padding-bottom: 25px; 
+    margin-bottom: 25px; 
   }
-  .footer-v4__logo {
+  .footer-v5__logo {
     max-width: 150px;
     height: auto;
     margin-bottom: 20px;
   }
-  .footer-v4__heading {
+  .footer-v5__heading {
     font-size: 18px;
     margin-top: 0;
     margin-bottom: 20px;
     font-weight: 600;
   }
-  .footer-v4__newsletter-form {
+  .footer-v5__newsletter-form {
     margin-top: 15px;
   }
-  .footer-v4__newsletter-fields {
+  .footer-v5__newsletter-fields {
     display: flex;
     border: 1.5px solid #ffffff;
     border-radius: 999px;
     overflow: hidden;
     max-width: 500px;
   }
-  .footer-v4__newsletter-input {
+  .footer-v5__newsletter-input {
     border: none;
     flex-grow: 1;
     padding: 12px;
     background-color: transparent;
     color: #fff;
   }
-  .footer-v4__newsletter-input::placeholder {
+  .footer-v5__newsletter-input::placeholder {
     color: #C2C3CC;
     font-size: 16px;
   }
-  .footer-v4__newsletter-button {
+  .footer-v5__newsletter-button {
     border: solid 0.5px #ffffff;
     background-color: #28a745;
     color: white;
@@ -206,41 +195,41 @@
     margin-left: -15px;
   }
 
-  .footer-v4__newsletter-button:hover {
+  .footer-v5__newsletter-button:hover {
     transform: scale(1.05);
   }
 
-  .footer-v4__menus-wrapper {
+  .footer-v5__menus-wrapper {
     display: flex;
     justify-content: space-between;
     gap: 40px;
   }
-  .footer-v4__linklist {
+  .footer-v5__linklist {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .footer-v4__linklist li {
+  .footer-v5__linklist li {
     margin-bottom: 10px;
   }
-  .footer-v4__linklist a {
+  .footer-v5__linklist a {
     text-decoration: none;
     color: inherit;
     transition: opacity 0.3s;
   }
-  .footer-v4__linklist a:hover {
+  .footer-v5__linklist a:hover {
     opacity: 0.7;
   }
 
-  .footer-v4__collections-wrapper {
+  .footer-v5__collections-wrapper {
     margin-bottom: 40px;
   }
-  .footer-v4__collections-list {
+  .footer-v5__collections-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
-  .footer-v4__collection-card {
+  .footer-v5__collection-card {
     text-decoration: none;
     color: white;
     position: relative;
@@ -248,23 +237,23 @@
     width: 110px;
     height: 165px;
   }
-  .footer-v4__collection-image-wrapper {
+  .footer-v5__collection-image-wrapper {
     width: 100%;
     height: 100%;
     border-radius: 8px;
     overflow: hidden;
     background-color: #333;
   }
-  .footer-v4__collection-image-wrapper img {
+  .footer-v5__collection-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-  .footer-v4__collection-card:hover .footer-v4__collection-image-wrapper img {
+  .footer-v5__collection-card:hover .footer-v5__collection-image-wrapper img {
     transform: scale(1.05);
   }
-  .footer-v4__collection-image-wrapper::after {
+  .footer-v5__collection-image-wrapper::after {
     content: '';
     position: absolute;
     top: 0; left: 0;
@@ -274,7 +263,7 @@
     border-radius: 4px;
     pointer-events: none;
   }
-  .footer-v4__collection-title {
+  .footer-v5__collection-title {
     position: absolute;
     bottom: 15px;
     left: 0;
@@ -285,74 +274,65 @@
     font-weight: 500;
     z-index: 2;
   }
-
-  .footer-v4__contact-wrapper {
-      margin-bottom: 40px;
-  }
-  .footer-v4__contact-details {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 25px;
-  }
-  .footer-v4__contact-item {
+  
+  .footer-v5__contact-item {
       display: flex;
       align-items: center;
       gap: 8px;
       text-decoration: none;
       color: inherit;
   }
-  .footer-v4__icon {
+  .footer-v5__icon {
       width: 18px;
       height: 18px;
       flex-shrink: 0;
   }
   
-  .footer-v4__bottom {
+  /* Bloco de CSS alterado */
+  .footer-v5__bottom-row {
     display: flex;
-    justify-content: flex-end; /* Alterado para a direita */
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
     padding-top: 20px;
     margin-top: 50px;
     font-size: 14px;
     color: #aaa;
   }
-  .footer-v4__right-column { /* Nova classe para o container da direita */
+  .footer-v5__contact-details {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Alinha os itens dentro dele para a direita */
+    flex-wrap: wrap;
+    gap: 25px;
   }
-  .footer-v4__payment-icons {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 5px; /* Mantém o espaçamento */
+  .footer-v5__copyright {
+    text-align: right;
   }
-  .payment-icon {
-    height: 24px;
-  }
+  /* Fim do bloco alterado */
+
 
   /* Responsividade */
   @media (max-width: 990px) {
-    .footer-v4__top-row {
+    .footer-v5__top-row {
       grid-template-columns: 1fr;
       gap: 30px;
     }
-    .footer-v4__collections-list, .footer-v4__contact-details {
+    .footer-v5__collections-list, .footer-v5__contact-details {
       justify-content: center;
     }
   }
 
   @media (max-width: 768px) {
-    .footer-v4__menus-wrapper {
+    .footer-v5__menus-wrapper {
         justify-content: flex-start;
     }
-    .footer-v4__bottom {
-      flex-direction: column;
-      align-items: center; /* Centraliza no mobile, o que é um bom padrão */
-      gap: 15px;
-      text-align: center;
+    .footer-v5__bottom-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-    .footer-v4__right-column {
-        align-items: center; /* Centraliza a coluna no mobile */
+    .footer-v5__copyright {
+        text-align: center;
     }
   }
 </style>
