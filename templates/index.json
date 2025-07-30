@@ -419,12 +419,53 @@
         "subtitle": "With 1600+ 5-star reviews",
         "background_color": "#f8f8f8",
         "title_color": "#000000",
-        "subtitle_color": "#555555"
+        "subtitle_color": "#555555",
+        "pagination_active_color": "#00ac4f"
       }
     },
     "suggested_products": {
       "type": "suggested-products",
-      "settings": {}
+      "blocks": {
+        "product_card_cEVL3c": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_bbP78b": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_jEytzR": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        },
+        "product_card_t4x3iT": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "review_text": "(5.0 Of 800 Reviews)"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_cEVL3c",
+        "product_card_bbP78b",
+        "product_card_jEytzR",
+        "product_card_t4x3iT"
+      ],
+      "settings": {
+        "title": "You May Also Like",
+        "background_color": "#ffffff",
+        "title_color": "#000000"
+      }
     }
   },
   "order": [

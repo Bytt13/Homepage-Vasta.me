@@ -124,15 +124,11 @@ CSS (ESTILOS)
 
  .real-reviews-container--{{section.id}} .swiper-wrapper {
     justify-content: center;
-    max-width: 909px;
+    max-width: 939px !important;
  }
 
-  .real-reviews-container--{{section.id}} .swiper-slide {
-    width: auto;
-   }   
-
   .real-reviews-container--{{section.id}} .swiper-container {
-    max-width: 909px;
+    max-width: 939px !important;
     margin: 0 auto;
     padding: 20px 0 50px 0;
   }
@@ -145,8 +141,8 @@ CSS (ESTILOS)
   }
 
   .real-reviews-container--{{section.id}} .swiper-pagination-bullet {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     text-align: center;
     line-height: 30px;
     font-size: 16px;
@@ -237,7 +233,6 @@ CSS (ESTILOS)
       const swiper = new Swiper(swiperContainer, {
         loop: false,
         
-        // AJUSTE: Configuração padrão para telas pequenas (mobile)
         slidesPerView: 1,
         spaceBetween: 15,
         centeredSlides: true,
@@ -245,24 +240,22 @@ CSS (ESTILOS)
         pagination: {
           el: `[data-section-id="${sectionId}"] .swiper-pagination`,
           clickable: true,
-          renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + '</span>';
-          },
+          dynamicBullets: true, 
         },
         
-        // AJUSTE: Configurações para telas maiores
+        // Configurações para telas maiores
         breakpoints: {
           // Telas de tablet
           768: {
             slidesPerView: 3,
-            spaceBetween: 15, // Espaçamento reduzido
+            spaceBetween: 15,
             centeredSlides: false,
           },
           // Telas de desktop
           1024: {
-            slidesPerView: 'auto',  // Garante 4 cards
-            spaceBetween: 15, // Espaçamento reduzido
-            centeredSlides: false,
+            slidesPerView: 4,
+            spaceBetween: 25,
+            centeredSlides: true,
           }
         }
       });
@@ -300,7 +293,7 @@ CSS (ESTILOS)
       "type": "color",
       "id": "background_color",
       "label": "Cor de Fundo da Seção",
-      "default": "#F8F8F8"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
